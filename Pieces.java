@@ -5,31 +5,22 @@ import java.awt.*;
 
 public class Pieces extends JPanel {
 
-    final protected int PIECE_WIDTH;
-    final protected int PIECE_HEIGHT;
-    private int xCoord = (600/5);
-    private int yCoord = (600/5);
+    final private int PIECE_WIDTH;
+    final private int PIECE_HEIGHT;
+    protected int xCoord = (600/5);
+    protected int yCoord = (600/5);
+    protected String typeOfPiece;
 
-    public Pieces(){
-
-        PIECE_WIDTH = (600/5)-30;
-        PIECE_HEIGHT = (600/5)-30;
+    public Pieces() {
+        PIECE_WIDTH = 90;
+        PIECE_HEIGHT = 90;
+        typeOfPiece = new String();
     }
 
-    public Pieces(int piece_width, int piece_height, int xCoordIn, int yCoordIn){
 
-        PIECE_WIDTH = piece_width;
-        PIECE_HEIGHT = piece_height;
-        xCoord = xCoordIn;
-        yCoord = yCoordIn;
-    }
-
-    public void paintPiece(Graphics g){
+    public void paintPiece(Graphics g) {
         paintComponent(g);
-
     }
-
-
 
     @Override
     public void paintComponent(Graphics g){
@@ -39,5 +30,11 @@ public class Pieces extends JPanel {
         g.drawRoundRect(xCoord, yCoord, PIECE_WIDTH, PIECE_HEIGHT, 10, 10);
         g.fillRoundRect(xCoord, yCoord, PIECE_WIDTH, PIECE_HEIGHT, 10, 10);
 
+        g.setColor(Color.GRAY);
+        g.drawRoundRect(xCoord+7, yCoord+7, PIECE_WIDTH-15, PIECE_HEIGHT-15, 10, 10);
+        g.fillRoundRect(xCoord+7, yCoord+7, PIECE_WIDTH-15, PIECE_HEIGHT-15, 10, 10);
+
+        g.setColor(Color.BLUE);
+        g.drawArc(xCoord+15, yCoord+15, 50, 140, 40, 120);
     }
 }

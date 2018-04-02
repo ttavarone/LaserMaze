@@ -2,14 +2,16 @@ package GamePieces;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-class BoardPanel extends JPanel
+class BoardPanel extends JPanel implements MouseListener
 {
-    final protected Pieces[][] board;
-    final protected int windowWidth = 800;
-    final protected int windowHeight = 800;
-    protected int boardWidth = 600;
-    protected int boardHeight = 600;
+    protected Pieces[][] board;
+    final private int windowWidth = 800;
+    final private int windowHeight = 800;
+    private int boardWidth = 600;
+    private int boardHeight = 600;
     Pieces p = new Pieces();
 
     public BoardPanel()
@@ -20,36 +22,16 @@ class BoardPanel extends JPanel
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(windowWidth,windowHeight));
         board = new Pieces[5][5];
+
+        addMouseListener(this);
     }
 
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("Laser Maze");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        BoardPanel panel = new BoardPanel();
-        frame.getContentPane().add(panel);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
 
     @Override
     public void paintComponent(Graphics g)
     {
 
-        int sqDim = 600/5; //height and width dimensions of square
+        int sqDim = 120; //height and width dimensions of square
 
         super.paintComponent(g);
         //creating basic board square
@@ -58,7 +40,7 @@ class BoardPanel extends JPanel
         g.setColor(Color.BLACK);
         g.drawRoundRect(90, 90, boardWidth+20, boardHeight+20, 50, 50);
         g.fillRoundRect(90, 90, boardWidth+20, boardHeight+20, 50, 50);
-        g.setColor(Color.GRAY);
+        g.setColor(Color.LIGHT_GRAY);
         g.fillRoundRect(100, 100, boardWidth, boardHeight, 50, 50);
 
         //create inner squares
@@ -94,6 +76,35 @@ class BoardPanel extends JPanel
         g.drawRect(100+sqDim*4, 100+sqDim*4, sqDim, sqDim);
 
         p.paintPiece(g);
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int button = e.getButton();
+        Pieces p = new Pieces();
+        paintComponent();
+        repaint();
+        e.consume();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }
