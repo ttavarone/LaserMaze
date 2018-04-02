@@ -3,16 +3,16 @@ package GamePieces;
 import javax.swing.*;
 import java.awt.*;
 
-public class Board extends JPanel
+class BoardPanel extends JPanel
 {
     final protected Pieces[][] board;
     final protected int windowWidth = 800;
     final protected int windowHeight = 800;
     protected int boardWidth = 600;
     protected int boardHeight = 600;
+    Pieces p = new Pieces();
 
-
-    public Board()
+    public BoardPanel()
     {
 
         super();
@@ -27,7 +27,7 @@ public class Board extends JPanel
         JFrame frame = new JFrame("Laser Maze");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Board panel = new Board();
+        BoardPanel panel = new BoardPanel();
         frame.getContentPane().add(panel);
 
         //Display the window.
@@ -93,6 +93,7 @@ public class Board extends JPanel
         g.drawRect(100+sqDim*3, 100+sqDim*4, sqDim, sqDim);
         g.drawRect(100+sqDim*4, 100+sqDim*4, sqDim, sqDim);
 
+        p.paintPiece(g);
 
     }
 }
