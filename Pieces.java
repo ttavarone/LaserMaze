@@ -3,6 +3,9 @@ package GamePieces;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class should be for creating board pieces
+ */
 public class Pieces extends JPanel {
 
     final private int PIECE_WIDTH;
@@ -10,16 +13,22 @@ public class Pieces extends JPanel {
     protected int xCoord = (600/5);
     protected int yCoord = (600/5);
     protected String typeOfPiece;
+    protected Color pieceColor;
 
     public Pieces() {
         PIECE_WIDTH = 90;
         PIECE_HEIGHT = 90;
         typeOfPiece = new String();
+        pieceColor = Color.GRAY;
     }
 
+    public void setPieceColor(Color c){
+        pieceColor = c;
+    }
 
-    public void paintPiece(Graphics g) {
-        paintComponent(g);
+    public void paintPiece() {
+        Graphics g
+        paintComponent(new Graphics());
     }
 
     @Override

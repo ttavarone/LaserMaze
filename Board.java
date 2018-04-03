@@ -2,10 +2,12 @@ package GamePieces;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-class BoardPanel extends JPanel implements MouseListener
+/**
+ * This class is just for creating the board graphic and its attributes
+ * NOTE: It does not control mouse clicks or gameplay
+ */
+class BoardPanel extends JPanel
 {
     protected Pieces[][] board;
     final private int windowWidth = 800;
@@ -23,7 +25,6 @@ class BoardPanel extends JPanel implements MouseListener
         setPreferredSize(new Dimension(windowWidth,windowHeight));
         board = new Pieces[5][5];
 
-        addMouseListener(this);
     }
 
 
@@ -82,7 +83,6 @@ class BoardPanel extends JPanel implements MouseListener
     @Override
     public void mouseClicked(MouseEvent e) {
         int button = e.getButton();
-        Pieces p = new Pieces();
         paintComponent();
         repaint();
         e.consume();
