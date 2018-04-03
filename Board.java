@@ -9,12 +9,11 @@ import java.awt.*;
  */
 class BoardPanel extends JPanel
 {
-    protected Pieces[][] board;
+    protected PiecesPanel[][] board;
     final private int windowWidth = 800;
     final private int windowHeight = 800;
     private int boardWidth = 600;
     private int boardHeight = 600;
-    Pieces p = new Pieces();
 
     public BoardPanel()
     {
@@ -23,7 +22,7 @@ class BoardPanel extends JPanel
         setOpaque(true);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(windowWidth,windowHeight));
-        board = new Pieces[5][5];
+        board = new PiecesPanel[5][5];
 
     }
 
@@ -76,36 +75,8 @@ class BoardPanel extends JPanel
         g.drawRect(100+sqDim*3, 100+sqDim*4, sqDim, sqDim);
         g.drawRect(100+sqDim*4, 100+sqDim*4, sqDim, sqDim);
 
-        p.paintPiece(g);
-
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        int button = e.getButton();
-        paintComponent();
-        repaint();
-        e.consume();
-    }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }
 
