@@ -10,16 +10,17 @@ import java.awt.event.MouseListener;
  */
 public class PiecesPanel extends JPanel implements MouseListener {
 
-    final private int PIECE_WIDTH;
-    final private int PIECE_HEIGHT;
-    protected int xCoord = (600/5);
-    protected int yCoord = (600/5);
+    final private int PIECE_WIDTH = 90;
+    final private int PIECE_HEIGHT = 90;
+    protected int xCoord;
+    protected int yCoord;
     protected String typeOfPiece;
     protected Color pieceColor;
 
     public PiecesPanel() {
-        PIECE_WIDTH = 90;
-        PIECE_HEIGHT = 90;
+
+        xCoord = 120;
+        yCoord = 120;
         typeOfPiece = new String();
         pieceColor = Color.RED;
         addMouseListener(this);
@@ -31,6 +32,7 @@ public class PiecesPanel extends JPanel implements MouseListener {
         int button = e.getButton();
         xCoord = e.getX();
         yCoord = e.getY();
+
         repaint();
         e.consume();
     }

@@ -9,8 +9,10 @@ public class PlayGame {
         JFrame frame = new JFrame("Laser Maze");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        BoardPanel panel = new BoardPanel();
-        frame.getContentPane().add(panel);
+        BoardPanel bPanel = new BoardPanel();
+        PiecesPanel pPanel = new PiecesPanel();
+        frame.getContentPane().add(bPanel);
+        frame.getContentPane().add(pPanel);
 
         //Display the window.
         frame.pack();
