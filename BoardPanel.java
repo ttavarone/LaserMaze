@@ -7,7 +7,7 @@ import java.awt.*;
  * This class is just for creating the board graphic and its attributes
  * NOTE: It does not control mouse clicks or gameplay
  */
-class BoardPanel extends JPanel
+public class BoardPanel extends JPanel
 {
     protected PiecesPanel[][] board;
     final private int windowWidth = 800;
@@ -75,6 +75,8 @@ class BoardPanel extends JPanel
         g.drawRect(100+sqDim*2, 100+sqDim*4, sqDim, sqDim);
         g.drawRect(100+sqDim*3, 100+sqDim*4, sqDim, sqDim);
         g.drawRect(100+sqDim*4, 100+sqDim*4, sqDim, sqDim);
+
+
 
     }
 

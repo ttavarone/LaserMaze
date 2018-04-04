@@ -3,24 +3,25 @@ package GamePieces;
 import javax.swing.*;
 import java.awt.*;
 
-public class PlayGame {
+public class PlayGame extends JPanel {
 
-    static JFrame frame = new JFrame("Laser Maze");
-
-    public static void piecePanel(){
-        PiecesPanel pPanel = new PiecesPanel();
-        frame.getContentPane().add(pPanel);
-    }
 
 
     private static void createAndShowGUI() {
         //Create and set up the window.
+        JFrame frame = new JFrame("Laser Maze");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        BoardPanel bPanel = new BoardPanel();
-        frame.getContentPane().add(bPanel);
 
-        piecePanel();
+        BoardPanel bPanel = new BoardPanel();
+        PiecesPanel pPanel = new PiecesPanel();
+        JPanel mainPanel = new JPanel();
+        mainPanel.setOpaque(true);
+
+        mainPanel.add(bPanel);
+        mainPanel.add(pPanel);
+
+        frame.getContentPane().add(mainPanel);
 
         //Display the window.
         frame.pack();

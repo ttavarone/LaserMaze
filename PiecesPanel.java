@@ -8,7 +8,8 @@ import java.util.*;
 /**
  * This class should be for creating board pieces
  */
-public class PiecesPanel extends JPanel implements MouseListener, MouseMotionListener {
+public class PiecesPanel extends JPanel implements MouseListener, MouseMotionListener
+ {
 
     private int xCoord;
     private int yCoord;
@@ -17,7 +18,11 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
     private Image blueMirror;
     private Image blueMirror2;
 
+
     public PiecesPanel() {
+
+        super();
+        setOpaque(true);
 
         xCoord = 120;
         yCoord = 120;
@@ -25,11 +30,13 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
         toolkit = Toolkit.getDefaultToolkit();
 
         yellowCheckpoint = toolkit.getImage("LaserMaze/src/GamePieces/yellowCheckpoint.jpg");
-        blueMirror = toolkit.getImage("LaserMaze/src/GamePieces/blueMirror.jpg");
+        blueMirror = toolkit.getImage("Users/ttavarone/IdeaProjects/LaserMaze/src/GamePieces/blueMirror.jpg");
         blueMirror2 = toolkit.getImage("LaserMaze/src/GamePieces/blueMirror2.jpg");
 
         addMouseListener(this);
     }
+
+
 
 
     @Override
@@ -42,6 +49,7 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
         repaint();
         e.consume();
     }
+
 
     @Override
     public void mouseDragged(MouseEvent e){
@@ -63,6 +71,8 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
     @Override
     public void mouseExited(MouseEvent e){}
 
+
+
     /**
      * Paints graphics on the components
      *
@@ -73,7 +83,9 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
         super.paintComponent(g);
 
         g.drawImage(yellowCheckpoint, xCoord, yCoord, this);
-
+        g.setColor(Color.BLUE);
+        g.drawRect(xCoord, yCoord, 500, 100);
+        g.fillRect(xCoord, yCoord, 100, 100);
 
     }
 
