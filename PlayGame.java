@@ -1,33 +1,33 @@
 package GamePieces;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PlayGame {
 
     static JFrame frame = new JFrame("Laser Maze");
 
-    private static void createAndShowBoard() {
+    public static void piecePanel(){
+        PiecesPanel pPanel = new PiecesPanel();
+        frame.getContentPane().add(pPanel);
+    }
+
+
+    private static void createAndShowGUI() {
         //Create and set up the window.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         BoardPanel bPanel = new BoardPanel();
         frame.getContentPane().add(bPanel);
 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    private static void createAndShowPieces() {
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        PiecesPanel pPanel = new PiecesPanel();
-        frame.getContentPane().add(pPanel);
+        piecePanel();
 
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
+
+
 
     public static void main(String[] args){
         //Schedule a job for the event-dispatching thread:
@@ -35,16 +35,9 @@ public class PlayGame {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    createAndShowBoard();
-                    createAndShowPieces();
-                    Thread.sleep(1000);
-                } catch (InterruptedException I) {
+                    createAndShowGUI();
+                } catch (Exception e) {
                 }
-            }
-        });
-        Thread pieces = new Thread(new Runnable() {
-            public void run(){
-
             }
         });
     }

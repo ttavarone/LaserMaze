@@ -24,6 +24,7 @@ class BoardPanel extends JPanel
         setPreferredSize(new Dimension(windowWidth,windowHeight));
         board = new PiecesPanel[5][5];
 
+
     }
 
 

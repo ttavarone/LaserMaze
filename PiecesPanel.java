@@ -2,27 +2,32 @@ package GamePieces;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.util.*;
 
 /**
  * This class should be for creating board pieces
  */
-public class PiecesPanel extends JPanel implements MouseListener {
+public class PiecesPanel extends JPanel implements MouseListener, MouseMotionListener {
 
-    final private int PIECE_WIDTH = 90;
-    final private int PIECE_HEIGHT = 90;
-    protected int xCoord;
-    protected int yCoord;
-    protected String typeOfPiece;
-    protected Color pieceColor;
+    private int xCoord;
+    private int yCoord;
+    private Toolkit toolkit;
+    private Image yellowCheckpoint;
+    private Image blueMirror;
+    private Image blueMirror2;
 
     public PiecesPanel() {
 
         xCoord = 120;
         yCoord = 120;
-        typeOfPiece = new String();
-        pieceColor = Color.RED;
+
+        toolkit = Toolkit.getDefaultToolkit();
+
+        yellowCheckpoint = toolkit.getImage("LaserMaze/src/GamePieces/yellowCheckpoint.jpg");
+        blueMirror = toolkit.getImage("LaserMaze/src/GamePieces/blueMirror.jpg");
+        blueMirror2 = toolkit.getImage("LaserMaze/src/GamePieces/blueMirror2.jpg");
+
         addMouseListener(this);
     }
 
@@ -30,6 +35,7 @@ public class PiecesPanel extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         int button = e.getButton();
+
         xCoord = e.getX();
         yCoord = e.getY();
 
@@ -38,45 +44,37 @@ public class PiecesPanel extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mouseDragged(MouseEvent e){
 
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseMoved(MouseEvent e){}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mousePressed(MouseEvent e){}
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseReleased(MouseEvent e){}
 
-    }
+    @Override
+    public void mouseEntered(MouseEvent e){}
 
-    public void setPieceColor(Color c) {
-        pieceColor = c;
-    }
+    @Override
+    public void mouseExited(MouseEvent e){}
 
+    /**
+     * Paints graphics on the components
+     *
+     * @param g the graphics input object
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        g.setColor(pieceColor);
-        g.drawRoundRect(xCoord, yCoord, PIECE_WIDTH, PIECE_HEIGHT, 10, 10);
-        g.fillRoundRect(xCoord, yCoord, PIECE_WIDTH, PIECE_HEIGHT, 10, 10);
+        g.drawImage(yellowCheckpoint, xCoord, yCoord, this);
 
-        g.setColor(Color.GRAY);
-        g.drawRoundRect(xCoord+7, yCoord+7, PIECE_WIDTH-15, PIECE_HEIGHT-15, 10, 10);
-        g.fillRoundRect(xCoord+7, yCoord+7, PIECE_WIDTH-15, PIECE_HEIGHT-15, 10, 10);
 
-        //
-        //g.setColor(Color.BLUE);
-        //g.drawArc(xCoord+15, yCoord+15, 50, 140, 40, 120);
-        //
     }
 
 }
