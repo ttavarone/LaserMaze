@@ -1,5 +1,4 @@
-package GamePieces;
-
+ 
 import javax.swing.*;
 
 public class PlayGame {

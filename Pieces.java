@@ -1,5 +1,3 @@
-package GamePieces;
-
 import javax.swing.*;
 import java.awt.*;
 
