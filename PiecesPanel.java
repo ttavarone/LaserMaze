@@ -14,9 +14,18 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
     private int xCoord;
     private int yCoord;
     private Toolkit toolkit;
-    private Image yellowCheckpoint;
-    private Image blueMirror;
-    private Image blueMirror2;
+    Image yellowCheckpoint;
+    Image blueMirror;
+    Image blueMirror2;
+    Image yellowCheckpoint2;
+    Image bottomLeftPurple;
+    Image bottomRightPurple;
+    Image purpleMirror;
+    Image topLeftPurple;
+    Image topRightPurple;
+    //Image laserBottom;
+    //Image laserRight;
+
 
 
     public PiecesPanel() {
@@ -29,9 +38,18 @@ public class PiecesPanel extends JPanel implements MouseListener, MouseMotionLis
 
         toolkit = Toolkit.getDefaultToolkit();
 
-        yellowCheckpoint = toolkit.getImage("LaserMaze/src/GamePieces/yellowCheckpoint.jpg");
-        blueMirror = toolkit.getImage("Users/ttavarone/IdeaProjects/LaserMaze/src/GamePieces/blueMirror.jpg");
-        blueMirror2 = toolkit.getImage("LaserMaze/src/GamePieces/blueMirror2.jpg");
+        yellowCheckpoint = toolkit.getImage("GamePieces/yellowCheckpoint.jpg");
+        blueMirror = toolkit.getImage("GamePieces/blueMirror.jpg");
+        blueMirror2 = toolkit.getImage("GamePieces/blueMirror2.jpg");
+        yellowCheckpoint2 = toolkit.getImage("GamePieces/yellowCheckpoint2.jpg");
+        bottomLeftPurple = toolkit.getImage("GamePieces/bottomLeftPurple.jpg");
+        bottomRightPurple = toolkit.getImage("GamePieces/bottomRightPurple.jpg");
+        purpleMirror = toolkit.getImage("GamePieces/purpleMirror.jpg");
+        topLeftPurple = toolkit.getImage("GamePieces/topLeftPurple.jpg");
+        topRightPurple = toolkit.getImage("GamePieces/topRightPurple.jpg");
+        //laserBottom = toolkit.getImage("GamePieces/laserBottom.jpg");
+        //laserRight = toolkit.getImage("GamePieces/laserRight.jpg");
+
 
         addMouseListener(this);
     }

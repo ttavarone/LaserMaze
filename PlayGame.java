@@ -16,7 +16,9 @@ public class PlayGame extends JPanel {
         BoardPanel bPanel = new BoardPanel();
         PiecesPanel pPanel = new PiecesPanel();
         JPanel mainPanel = new JPanel();
-        mainPanel.setOpaque(true);
+        mainPanel.setOpaque(false);
+        bPanel.setOpaque(false);
+        pPanel.setOpaque(true);
 
         mainPanel.add(bPanel);
         mainPanel.add(pPanel);
