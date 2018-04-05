@@ -12,13 +12,12 @@ public class PlayGame extends JPanel {
         JFrame frame = new JFrame("Laser Maze");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         BoardPanel bPanel = new BoardPanel();
         PiecesPanel pPanel = new PiecesPanel();
         JPanel mainPanel = new JPanel();
         mainPanel.setOpaque(false);
         bPanel.setOpaque(false);
-        pPanel.setOpaque(true);
+        pPanel.setOpaque(false);
 
         mainPanel.add(bPanel);
         mainPanel.add(pPanel);
@@ -37,10 +36,8 @@ public class PlayGame extends JPanel {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                try {
                     createAndShowGUI();
-                } catch (Exception e) {
-                }
+
             }
         });
     }
