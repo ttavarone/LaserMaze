@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=AdvancedPieces()
+comment1.params=g
+comment1.target=void\ paintAdvanced(java.awt.Graphics)
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+numComments=3

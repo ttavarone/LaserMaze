@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=startingPos
+comment0.target=BluePiece(int)
+comment0.text=\r\n\ This\ method\ creates\ a\ new\ blue\ piece\ n\ the\ board\ at\ the\ given\ starting\ position.\r\n\ The\ default\ is\ position\ 0\ when\ going\ from\ a\ question\ mark.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n
+comment1.params=g
+comment1.target=void\ paintPiece(java.awt.Graphics)
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=e
+comment3.target=void\ mouseEntered(java.awt.event.MouseEvent)
+comment4.params=e
+comment4.target=void\ mouseExited(java.awt.event.MouseEvent)
+comment5.params=e
+comment5.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment5.text=\r\n\ This\ method\ increases\ the\ level\ count\ and\ repaints\ the\ JPanel\r\n\ @param\ e\ -\ The\ event\ where\ the\ mouse\ is\ clicked\ down\r\n
+comment6.params=e
+comment6.target=void\ mousePressed(java.awt.event.MouseEvent)
+comment7.params=e
+comment7.target=void\ mouseReleased(java.awt.event.MouseEvent)
+comment8.params=
+comment8.target=java.awt.Image\ getImage()
+comment8.text=\r\n\ This\ method\ gets\ the\ current\ state\ of\ the\ blue\ piece\ to\ paint\ onto\ the\ PaintComponent\r\n\ @return\ -\ the\ current\ state\ of\ the\ image.\r\n
+numComments=9
