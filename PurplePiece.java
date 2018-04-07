@@ -8,20 +8,16 @@ import java.awt.event.*;
  * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
-public class PurplePiece extends JPanel implements MouseListener, MouseMotionListener {
+public class PurplePiece extends Piece implements MouseListener, MouseMotionListener {
 
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
-    protected int xCoord = (600/5);
-    protected int yCoord = (600/5);
-    protected String typeOfPiece;
     protected Toolkit toolkit;
     private Image botLeft;
     private Image topLeft;
     private Image topRight;
     private Image botRight;
     private Image questionMark;
-    private Image[] imgArr;
     private int currentIndex;
     int xCoordinate, yCoordinate;
     int xOffset, yOffset;
@@ -51,7 +47,6 @@ public class PurplePiece extends JPanel implements MouseListener, MouseMotionLis
 
         PIECE_WIDTH = 90;
         PIECE_HEIGHT = 90;
-        typeOfPiece = "PurplePiece";
         currentIndex = startingPos;
         xCoordinate = startingX;
         yCoordinate = startingY;
@@ -73,7 +68,7 @@ public class PurplePiece extends JPanel implements MouseListener, MouseMotionLis
     @Override
     public void mouseExited( MouseEvent e ) { }
 
-   /**
+    /**
      * This method will rotate the image or change from a question mark
      * if the image is right clicked
      * @param e - The event where the mouse is clicked down
@@ -145,31 +140,69 @@ public class PurplePiece extends JPanel implements MouseListener, MouseMotionLis
             yCoordinate = e.getY() + yOffset;
         }
     }
-
+    
     /**
-     * This method gets the current state of the purple piece for PaintComponent
-     * @return - the current state of the image.
+     * This method gets the current row the piece is in. It is -1 if not on board.
+     * @return row - current row of piece on the game board.
      */
+    public int getRow()
+    {
+        return row;
+    }
+    
+    /**
+     * This method gets the current column the piece is in. It is -1 if not on board.
+     * @return col - current column of piece on the game board.
+     */
+    public int getCol()
+    {
+        return col;
+    }
+    
+    /**
+     * This method sets the new location on the board for the piece. 
+     * @param newRow - new row the piece is in on the board.
+     * @param newCol - new column the piece is in on the board.
+     */
+    public void setLocation(int newRow, int newCol)
+    {
+        row = newRow;
+        col = newCol;
+    }
+
+    @Override
     public Image getImage()
     {
         return imgArr[currentIndex];
     }
 
-    /**
-     * This method returns the current xCoordinate of the piece
-     * @return - the current position of the object on the x axis
-     */
+    @Override
     public int getXCoord()
     {
         return xCoordinate;
     }
 
-    /**
-     * This method returns the current yCoordinate of the piece
-     * @return - the current position of the object on the y axis
-     */
+    @Override
+    public void setXCoord(int x)
+    {
+        xCoordinate = x;
+    }
+
+    @Override
     public int getYCoord()
     {
         return yCoordinate;
+    }
+    
+    @Override
+    public void setYCoord(int y)
+    {
+        yCoordinate = y;
+    }
+    
+    @Override
+    public int getCurrentIndex()
+    {
+        return currentIndex;
     }
 }

@@ -4,25 +4,23 @@ import java.awt.event.*;
 
 /**
  * This class creates a blue piece to be used for laser maze. The laser can bounce off this piece
- * from all four directions, and can be both rotated and dragged
+ * from all four directions, and can be both rotated and dragged.
+ * 
  * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
-public class BluePiece extends JPanel implements MouseListener, MouseMotionListener{
+public class BluePiece extends Piece implements MouseListener, MouseMotionListener{
 
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
-    protected int xCoord = (600/5);
-    protected int yCoord = (600/5);
     protected Toolkit toolkit;
     private Image topLeft;
     private Image topRight;
     private Image questionMark;
-    private Image[] imgArr;
     private int currentIndex;
-    int xCoordinate, yCoordinate;
-    int xOffset, yOffset;
-    boolean held = false;
+    private int xCoordinate, yCoordinate;
+    private int xOffset, yOffset;
+    private boolean held = false;
 
     /**
      * This method creates a new blue piece n the board at the given starting position.
@@ -138,31 +136,40 @@ public class BluePiece extends JPanel implements MouseListener, MouseMotionListe
             yCoordinate = e.getY() + yOffset;
         }
     }
-
-    /**
-     * This method gets the current state of the blue piece for PaintComponent
-     * @return - the current state of the image.
-     */
+    
+    @Override
     public Image getImage()
     {
         return imgArr[currentIndex];
     }
 
-    /**
-     * This method returns the current xCoordinate of the piece
-     * @return - the current position of the object on the x axis
-     */
+    @Override
     public int getXCoord()
     {
         return xCoordinate;
     }
+    
+    @Override
+    public void setXCoord(int x)
+    {
+        xCoordinate = x;
+    }
 
-    /**
-     * This method returns the current yCoordinate of the piece
-     * @return - the current position of the object on the y axis
-     */
+    @Override
     public int getYCoord()
     {
         return yCoordinate;
+    }
+    
+    @Override
+    public void setYCoord(int y)
+    {
+        yCoordinate = y;
+    }
+    
+    @Override
+    public int getCurrentIndex()
+    {
+        return currentIndex;
     }
 }
