@@ -1,8 +1,2 @@
 #BlueJ class context
-comment0.params=
-comment0.target=BeginnerPieces()
-comment1.params=g
-comment1.target=void\ paintBeginner(java.awt.Graphics)
-comment2.params=g
-comment2.target=void\ paintComponent(java.awt.Graphics)
-numComments=3
+numComments=0

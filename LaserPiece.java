@@ -14,13 +14,14 @@ public class LaserPiece extends JPanel implements MouseListener {
     private Image right;
     private Image[] imgArr;
     private int currentIndex;
+    int xCoordinate, yCoordinate;
 
     /**
      * This method creates a new yellow piece on the board at the given starting position.
      * The default is position 0 when going from a question mark.
      * @param startingPos - the starting position of the piece.
      */
-    public LaserPiece(int startingPos) {
+    public LaserPiece(int startingPos, int startingX, int startingY) {
         toolkit = Toolkit.getDefaultToolkit();
         
         bottom = toolkit.getImage("project4images\\LaserBottom.jpg");
@@ -33,18 +34,10 @@ public class LaserPiece extends JPanel implements MouseListener {
         PIECE_HEIGHT = 90;
         typeOfPiece = "LaserPiece";
         currentIndex = startingPos;
+        xCoordinate = startingX;
+        yCoordinate = startingY;
         
         addMouseListener(this);
-    }
-
-    public void paintPiece(Graphics g) {
-        paintComponent(g);
-    }
-
-    @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(imgArr[currentIndex], 0, 190, this);
     }
     
     @Override
@@ -69,5 +62,15 @@ public class LaserPiece extends JPanel implements MouseListener {
     public Image getImage()
     {
         return imgArr[currentIndex];
+    }
+    
+    public int getXCoord()
+    {
+        return xCoordinate;
+    }
+    
+    public int getYCoord()
+    {
+        return yCoordinate;
     }
 }

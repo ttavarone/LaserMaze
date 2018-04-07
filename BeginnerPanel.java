@@ -4,19 +4,26 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-class BeginnerPanel extends JPanel implements MouseListener, MouseMotionListener
-{
+class BeginnerPanel// extends JPanel implements MouseListener, MouseMotionListener
+{/*
     protected Pieces[][] board;
     final private int windowWidth = 850;
     final private int windowHeight = 800;
     private int boardWidth = 600;
     private int boardHeight = 600;
     Pieces p = new Pieces();
-    BeginnerPieces bp = new BeginnerPieces();
-    
+    //BeginnerPieces bp = new BeginnerPieces();
+
+    LaserPiece laser = new LaserPiece(1);
+    PurplePiece botLeft = new PurplePiece(0);
+    PurplePiece botRight = new PurplePiece(3);
+    PurplePiece topRight = new PurplePiece(2);
+    TargetPiece bottom = new TargetPiece(0);
+    BluePiece blueQ = new BluePiece(2, 725, 590);
+
     public BeginnerPanel()
     {
-        
+
         super();
         setOpaque(true);
         setBackground(Color.WHITE);
@@ -26,7 +33,9 @@ class BeginnerPanel extends JPanel implements MouseListener, MouseMotionListener
         addMouseListener(this);
     }
 
-
+    /**
+     * This method paints the board, and the pieces in their 
+     /
     @Override
     public void paintComponent(Graphics g)
     {
@@ -75,9 +84,13 @@ class BeginnerPanel extends JPanel implements MouseListener, MouseMotionListener
         g.drawRect(100+sqDim*3, 100+sqDim*4, sqDim, sqDim);
         g.drawRect(100+sqDim*4, 100+sqDim*4, sqDim, sqDim);
 
-        //p.paintPiece(g);
-        bp.paintBeginner(g);
-        
+        g.drawImage(laser.getImage(), 110, 230, this);
+        g.drawImage(botLeft.getImage(), 230, 590, this);
+        g.drawImage(botRight.getImage(), 590, 590, this);
+        g.drawImage(topRight.getImage(), 590, 230, this);
+        g.drawImage(bottom.getImage(), 230, 110, this);
+        g.drawImage(blueQ.getImage(), blueQ.getXCoord(), blueQ.getYCoord(), this);
+
         repaint();
     }
 
@@ -87,12 +100,12 @@ class BeginnerPanel extends JPanel implements MouseListener, MouseMotionListener
         Pieces p = new Pieces();
         //paintComponent();
         repaint();
-        e.consume();*/
+        e.consume();/
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     @Override
@@ -109,14 +122,14 @@ class BeginnerPanel extends JPanel implements MouseListener, MouseMotionListener
     public void mouseExited(MouseEvent e) {
 
     }
-    
+
     @Override
     public void mouseMoved(MouseEvent e){
-        
+
     }
-    
+
     @Override
     public void mouseDragged(MouseEvent e){
-        
-    }
+
+    }*/
 }

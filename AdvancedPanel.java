@@ -4,8 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-class AdvancedPanel extends JPanel implements MouseListener, MouseMotionListener
-{
+class AdvancedPanel extends JPanel// implements MouseListener, MouseMotionListener
+{/*
     protected Pieces[][] board;
     final private int windowWidth = 850;
     final private int windowHeight = 800;
@@ -110,5 +110,5 @@ class AdvancedPanel extends JPanel implements MouseListener, MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e){
         
-    }
+    }*/
 }

@@ -3,13 +3,13 @@ import java.awt.*;
 
 public class AdvancedPieces extends JPanel {
 
-    final private int PIECE_WIDTH;
+    /*final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
     protected int xCoord = (600/5);
     protected int yCoord = (600/5);
     protected String typeOfPiece;
     LaserPiece laser = new LaserPiece(0);
-    BluePiece topLeft = new BluePiece(0);
+    BluePiece topLeft = new BluePiece(0, 110, 470);
     TargetPiece target = new TargetPiece(1);
     YellowPiece yellow = new YellowPiece(2);
     PurplePiece question1 = new PurplePiece(4);
@@ -40,5 +40,5 @@ public class AdvancedPieces extends JPanel {
         g.drawImage(question2.getImage(), 725, 390, this);
         g.drawImage(question3.getImage(), 725, 490, this);
         g.drawImage(question4.getImage(), 725, 590, this);
-    }
+    }*/
 }

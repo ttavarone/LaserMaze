@@ -12,7 +12,7 @@ public class PlayGame {
                 null, levels, levels[1]);
         if(n == 0)//beginner
         {
-            BeginnerPanel bPanel = new BeginnerPanel();
+            BoardPanel bPanel = new BoardPanel(0);
             frame.getContentPane().add(bPanel);
 
             //Display the window.
@@ -21,7 +21,7 @@ public class PlayGame {
         }
         else//advanced
         {
-            AdvancedPanel aPanel = new AdvancedPanel();
+            BoardPanel aPanel = new BoardPanel(1);
             frame.getContentPane().add(aPanel);
 
             //Display the window.

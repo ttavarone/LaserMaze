@@ -15,13 +15,14 @@ public class YellowPiece extends JPanel implements MouseListener {
     private Image yellowQ;
     private Image[] imgArr;
     private int currentIndex;
+    int xCoordinate, yCoordinate;
 
     /**
      * This method creates a new yellow piece on the board at the given starting position.
      * The default is position 0 when going from a question mark.
      * @param startingPos - the starting position of the piece.
      */
-    public YellowPiece(int startingPos) {
+    public YellowPiece(int startingPos, int startingX, int startingY) {
         toolkit = Toolkit.getDefaultToolkit();
 
         horizontal = toolkit.getImage("project4images\\HorizontalYellow.jpg");
@@ -36,18 +37,10 @@ public class YellowPiece extends JPanel implements MouseListener {
         PIECE_HEIGHT = 90;
         typeOfPiece = "YellowPiece";
         currentIndex = startingPos;
+        xCoordinate = startingX;
+        yCoordinate = startingY;
 
         addMouseListener(this);
-    }
-
-    public void paintPiece(Graphics g) {
-        paintComponent(g);
-    }
-
-    @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(imgArr[currentIndex], 0, 190, this);
     }
 
     @Override
@@ -90,5 +83,15 @@ public class YellowPiece extends JPanel implements MouseListener {
     public Image getImage()
     {
         return imgArr[currentIndex];
+    }
+    
+    public int getXCoord()
+    {
+        return xCoordinate;
+    }
+    
+    public int getYCoord()
+    {
+        return yCoordinate;
     }
 }

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BeginnerPieces extends JPanel {
-
+/*
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
     protected int xCoord = (600/5);
@@ -13,7 +13,7 @@ public class BeginnerPieces extends JPanel {
     PurplePiece botRight = new PurplePiece(3);
     PurplePiece topRight = new PurplePiece(2);
     TargetPiece bottom = new TargetPiece(0);
-    BluePiece blueQ = new BluePiece(2);
+    BluePiece blueQ = new BluePiece(2, 725, 590);
 
     public BeginnerPieces() {
         PIECE_WIDTH = 90;
@@ -35,6 +35,6 @@ public class BeginnerPieces extends JPanel {
         g.drawImage(botRight.getImage(), 590, 590, this);
         g.drawImage(topRight.getImage(), 590, 230, this);
         g.drawImage(bottom.getImage(), 230, 110, this);
-        g.drawImage(blueQ.getImage(), 725, 590, this);
-    }
+        g.drawImage(blueQ.getImage(), blueQ.getXCoord(), blueQ.getYCoord(), this);
+    }*/
 }

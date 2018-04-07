@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class PurplePiece extends JPanel implements MouseListener {
+public class PurplePiece extends JPanel implements MouseListener, MouseMotionListener {
 
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
@@ -17,13 +17,16 @@ public class PurplePiece extends JPanel implements MouseListener {
     private Image questionMark;
     private Image[] imgArr;
     private int currentIndex;
+    int xCoordinate, yCoordinate;
+    int xOffset, yOffset;
+    boolean held = false;
 
     /**
      * This method creates a new yellow piece on the board at the given starting position.
      * The default is position 0 when going from a question mark.
      * @param startingPos - the starting position of the piece.
      */
-    public PurplePiece(int startingPos) {
+    public PurplePiece(int startingPos, int startingX, int startingY) {
         toolkit = Toolkit.getDefaultToolkit();
         
         botLeft = toolkit.getImage("project4images\\BotLeftPurple.jpg");
@@ -42,20 +45,12 @@ public class PurplePiece extends JPanel implements MouseListener {
         PIECE_HEIGHT = 90;
         typeOfPiece = "PurplePiece";
         currentIndex = startingPos;
+        xCoordinate = startingX;
+        yCoordinate = startingY;
         
         addMouseListener(this);
     }
 
-    public void paintPiece(Graphics g) {
-        paintComponent(g);
-    }
-
-    @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(imgArr[currentIndex], 0, 190, this);
-    }
-    
     @Override
     public void mouseEntered( MouseEvent e ) { }
 
@@ -69,29 +64,52 @@ public class PurplePiece extends JPanel implements MouseListener {
     @Override
     public void mouseClicked( MouseEvent e ) {
         int button = e.getButton();
-        if(button == 1)
+        if(button == 3)
         {
-            currentIndex = ((currentIndex + 1) % 4);
-        }
-        else if(button == 3)
-        {
-            if(currentIndex == 0)
+            if(currentIndex >= 3)
             {
-                currentIndex = 3;
+                currentIndex = 0;
             }
             else
             {
-                currentIndex = ((currentIndex - 1) % 4);
+                currentIndex += 1;
             }
         }
         repaint();
     }
 
     @Override
-    public void mousePressed( MouseEvent e ) { }
+    public void mousePressed( MouseEvent e ) {
+        int button = e.getButton();
+        if(button == 1)
+        {
+            held = true;
+            xOffset = xCoordinate - e.getX();
+            yOffset = yCoordinate - e.getY();
+        }
+    }
 
     @Override
-    public void mouseReleased( MouseEvent e ) { }
+    public void mouseReleased( MouseEvent e ) {
+        int button = e.getButton();
+        if(button == 1)
+        {
+            held = false;
+        }
+    }
+
+    @Override
+    public void mouseMoved( MouseEvent e ){  }
+
+    @Override
+    public void mouseDragged( MouseEvent e) {
+        if(held)
+        {
+            xCoordinate = e.getX() + xOffset;
+            yCoordinate = e.getY() + yOffset;
+        }
+    }
+
     
     /**
      * This method gets the current state of the purple piece to paint onto the PaintComponent
@@ -100,5 +118,15 @@ public class PurplePiece extends JPanel implements MouseListener {
     public Image getImage()
     {
         return imgArr[currentIndex];
+    }
+    
+    public int getXCoord()
+    {
+        return xCoordinate;
+    }
+    
+    public int getYCoord()
+    {
+        return yCoordinate;
     }
 }
