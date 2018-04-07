@@ -3,10 +3,17 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+/**
+ * This method creates the panel based on the input it is given, then allows the player to move
+ * the pieces in order to fire the laser.
+ * 
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * @version 1.0
+ */
 
 class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
 {
-    protected Pieces[][] board;
+    protected BlankPieces[][] board;
     final private int windowWidth = 850;
     final private int windowHeight = 800;
     private int boardWidth = 600;
@@ -23,6 +30,11 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     PurplePiece purple4 = new PurplePiece(2, 1000, 1000);//725, 590
     boolean beginner = true;
 
+    /**
+     * This constructor creates the board based on the inputted difficulty. It also does the 
+     * important task of activiating the listeners.
+     * @param mode - whether the board will be in beginner or advanced
+     */
     public BoardPanel(int mode)
     {
 
@@ -30,7 +42,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         setOpaque(true);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(windowWidth,windowHeight));
-        board = new Pieces[5][5];
+        board = new BlankPieces[5][5];
 
         if(mode == 1)
         {
@@ -49,6 +61,11 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         addMouseMotionListener( this );
     }
 
+    /**
+     * This method creates the board for the game and all the pieces based on 
+     * their x and y coordinates, as well as the current orientatio of the piece.
+     * @ param g - The image to be created.
+     */
     @Override
     public void paintComponent(Graphics g)
     {
@@ -109,19 +126,28 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
 
     }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mouseEntered( MouseEvent e ) { }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mouseExited( MouseEvent e ) { }
 
     /**
-     * This method increases the level count and repaints the JPanel
+     * This method will determine if a piece is right clicked on, and if it is in the correct difficulty,
+     * it will go into that pieces mouseClicked method and rotate it
      * @param e - The event where the mouse is clicked down
      */
     @Override
     public void mouseClicked( MouseEvent e ) {
-        if(beginner)
+        if(beginner)// blue is the only piece to rotate in beginner
         {
             if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
             {
@@ -129,7 +155,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 repaint();
             }
         }
-        else
+        else // both purple and yellow can rotate in advanced
         {
             if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
             {
@@ -159,9 +185,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
     }
 
+    /**
+     * This method will determine if the user pressed the mouse down on a valid piece, and then send it into that
+     * pieces mouse pressed handler to determine what happens.
+     * @param e - when the mouse is pushed down
+     */
     @Override
     public void mousePressed( MouseEvent e ) {
-        if(beginner)
+        if(beginner) //blue is the only piece that can be moved in beginner
         {
             if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
             {
@@ -169,7 +200,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 repaint();
             }
         }
-        else
+        else // purple is the only piece that can be moved in advanced
         {
             if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
             {
@@ -194,9 +225,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
     }
 
+    /**
+     * This method determines if the mouse is released over a piece, and then sends it 
+     * into the piece to determine what it does.
+     * @param e - the event where the mouse button is pulled up.
+     */
     @Override
     public void mouseReleased( MouseEvent e ) {
-        if(beginner)
+        if(beginner) //blue is the only piece that can be moved in beginner
         {
             if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
             {
@@ -204,7 +240,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 repaint();
             }
         }
-        else
+        else // purple is the only piece that can be moved in advanced
         {
             if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
             {
@@ -229,12 +265,21 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
     }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mouseMoved( MouseEvent e ){  }
 
+    /**
+     * This method determines if the mouse is dragged over a valid piece, and then sends it 
+     * down into that pieces method to determine what occurs. 
+     * @param e - The event where the mouse if moved while being held down.
+     */
     @Override
     public void mouseDragged( MouseEvent e) {
-        if(beginner)
+        if(beginner) //blue is the only piece that can be moved in beginner
         {
             if(e.getX() >= blue.getXCoord() - 5 && e.getX() <= blue.getXCoord() + 105 && e.getY() >= blue.getYCoord() - 5 && e.getY() <= blue.getYCoord() + 105)
             {
@@ -242,24 +287,24 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 repaint();
             }
         }
-        else
+        else //purple is the only piece that can be moved in advanced
         {
-            if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
+            if(e.getX() >= purple1.getXCoord() - 5 && e.getX() <= purple1.getXCoord() + 105 && e.getY() >= purple1.getYCoord() - 5 && e.getY() <= purple1.getYCoord() + 105)
             {
                 purple1.mouseDragged(e);
                 repaint();
             }
-            else if(e.getX() >= purple2.getXCoord() && e.getX() <= purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord() && e.getY() <= purple2.getYCoord() + 100)
+            else if(e.getX() >= purple2.getXCoord() - 5 && e.getX() <= purple2.getXCoord() + 105 && e.getY() >= purple2.getYCoord() -5 && e.getY() <= purple2.getYCoord() + 105)
             {
                 purple2.mouseDragged(e);
                 repaint();
             }
-            else if(e.getX() >= purple3.getXCoord() && e.getX() <= purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord() && e.getY() <= purple3.getYCoord() + 100)
+            else if(e.getX() >= purple3.getXCoord() - 5 && e.getX() <= purple3.getXCoord() + 105 && e.getY() >= purple3.getYCoord() - 5 && e.getY() <= purple3.getYCoord() + 105)
             {
                 purple3.mouseDragged(e);
                 repaint();
             }
-            else if(e.getX() >= purple4.getXCoord() && e.getX() <= purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord() && e.getY() <= purple4.getYCoord() + 100)
+            else if(e.getX() >= purple4.getXCoord() - 5 && e.getX() <= purple4.getXCoord() + 105 && e.getY() >= purple4.getYCoord() - 5 && e.getY() <= purple4.getYCoord() + 105)
             {
                 purple4.mouseDragged(e);
                 repaint();
@@ -267,4 +312,3 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
     }
 }
-

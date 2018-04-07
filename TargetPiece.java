@@ -2,7 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class TargetPiece extends JPanel implements MouseListener {
+/**
+ * This class creates a target piece to be used for laser maze. The laser must end at the target on this piece, 
+ * and the laser can bounce off of the side with mirrors. Since this piece does not have to rotate or move,
+ * there is no Mouse Listener
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * @version 1.0
+ */
+public class TargetPiece extends JPanel{
 
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
@@ -37,38 +44,30 @@ public class TargetPiece extends JPanel implements MouseListener {
         xCoordinate = startingX;
         yCoordinate = startingY;
         
-        addMouseListener(this);
     }
     
-    @Override
-    public void mouseEntered( MouseEvent e ) { }
-
-    @Override
-    public void mouseExited( MouseEvent e ) { }
-
-    @Override
-    public void mouseClicked( MouseEvent e ) {   }
-
-    @Override
-    public void mousePressed( MouseEvent e ) { }
-
-    @Override
-    public void mouseReleased( MouseEvent e ) { }
-    
     /**
-     * This method gets the current state of the yellow piece to paint onto the PaintComponent
+     * This method gets the current state of the target piece for PaintComponent
      * @return - the current state of the image.
      */
     public Image getImage()
     {
         return imgArr[currentIndex];
     }
-    
+
+    /**
+     * This method returns the current xCoordinate of the piece
+     * @return - the current position of the object on the x axis
+     */
     public int getXCoord()
     {
         return xCoordinate;
     }
-    
+
+    /**
+     * This method returns the current yCoordinate of the piece
+     * @return - the current position of the object on the y axis
+     */
     public int getYCoord()
     {
         return yCoordinate;

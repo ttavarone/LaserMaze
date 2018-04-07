@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * This class creates a blue piece to be used for laser maze. The laser must go through the center
+ * of this piece to work. This piece can be rotated, but not dragged.
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * @version 1.0
+ */
 public class YellowPiece extends JPanel implements MouseListener {
 
     final private int PIECE_WIDTH;
@@ -43,14 +49,23 @@ public class YellowPiece extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mouseEntered( MouseEvent e ) { }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mouseExited( MouseEvent e ) { }
 
     /**
-     * This method increases the level count and repaints the JPanel
+     * This method will rotate the image or change from a question mark
+     * if the image is right clicked
      * @param e - The event where the mouse is clicked down
      */
     @Override
@@ -70,26 +85,42 @@ public class YellowPiece extends JPanel implements MouseListener {
         repaint();
     }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mousePressed( MouseEvent e ) { }
 
+    /**
+     * Only exists to override an abstract method
+     * @param e - Mouse event
+     */
     @Override
     public void mouseReleased( MouseEvent e ) { }
 
     /**
-     * This method gets the current state of the yellow piece to paint onto the PaintComponent
+     * This method gets the current state of the yellow piece for PaintComponent
      * @return - the current state of the image.
      */
     public Image getImage()
     {
         return imgArr[currentIndex];
     }
-    
+
+    /**
+     * This method returns the current xCoordinate of the piece
+     * @return - the current position of the object on the x axis
+     */
     public int getXCoord()
     {
         return xCoordinate;
     }
-    
+
+    /**
+     * This method returns the current yCoordinate of the piece
+     * @return - the current position of the object on the y axis
+     */
     public int getYCoord()
     {
         return yCoordinate;
