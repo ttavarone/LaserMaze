@@ -18,7 +18,7 @@ public class TargetPiece extends Piece{
     protected String typeOfPiece;
     protected Toolkit toolkit;
     private Image bottom;
-    private Image right;
+    private Image left;
     private int currentIndex;
     int xCoordinate, yCoordinate;
 
@@ -31,10 +31,10 @@ public class TargetPiece extends Piece{
         toolkit = Toolkit.getDefaultToolkit();
         
         bottom = toolkit.getImage("project4images\\TargetBottom.jpg");
-        right = toolkit.getImage("project4images\\TargetRight.jpg");
+        left = toolkit.getImage("project4images\\TargetRight.jpg");
         imgArr = new Image[2];
         imgArr[0] = bottom;
-        imgArr[1] = right;
+        imgArr[1] = left;
         
         PIECE_WIDTH = 90;
         PIECE_HEIGHT = 90;

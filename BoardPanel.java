@@ -15,10 +15,11 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
 {
     protected Piece[][] board;
     final private int windowWidth = 850;
-    final private int windowHeight = 800;
+    final private int windowHeight = 850;
     private int boardWidth = 600;
     private int boardHeight = 600;
     //These pieces are present on both board
+    protected FireButton fButton = new FireButton();
     protected LaserPiece laser = new LaserPiece(1, 110, 230);
     protected TargetPiece target = new TargetPiece(0, 230, 110);
     protected BluePiece blue = new BluePiece(2, 725, 590);
@@ -29,13 +30,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     protected YellowPiece yellow = new YellowPiece(2, 1000, 1000);//470, 350);
     protected PurplePiece purple4 = new PurplePiece(2, 1000, 1000);//725, 590
     private boolean beginner = true;
-    private boolean laserDraw = true;
-
+    private boolean laserDraw = false;;
+    //These prevent the purples from overlapping when dragged
     private boolean draggingPurple1 = false;
     private boolean draggingPurple2 = false;
     private boolean draggingPurple3 = false;
     private boolean draggingPurple4 = false;
 
+    public int totalPieces = 5;
     public int previousX, previousY;
 
     /**
@@ -75,6 +77,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             board[4][5] = purple4;
             purple4.setLocation(4,5);
             beginner = false;
+            totalPieces = 6;
         }
         else
         {
@@ -144,6 +147,16 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         g.drawRect(100+sqDim*3, 100+sqDim*4, sqDim, sqDim);
         g.drawRect(100+sqDim*4, 100+sqDim*4, sqDim, sqDim);
 
+        //Box around pieces to use.
+        g.setColor(Color.BLACK);
+        g.fillRect(715, 100, 5, 600);
+        g.fillRect(825, 100, 5, 600);
+        g.fillRect(715, 100, 110, 5);
+        g.fillRect(715, 700, 115, 5);
+
+        g.drawImage(fButton.getImage(), 725, 710, this);
+
+        //Drawing the piece
         g.drawImage(laser.getImage(), laser.getXCoord(), laser.getYCoord(), this);
         g.drawImage(blue.getImage(), blue.getXCoord(), blue.getYCoord(), this);
         g.drawImage(target.getImage(), target.getXCoord(), target.getYCoord(), this);
@@ -154,13 +167,18 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         g.drawImage(purple4.getImage(), purple4.getXCoord(), purple4.getYCoord(), this);
 
         g.setColor(Color.RED);
+        g.setFont(new Font("Times New Roman", 20, 20));
         if(laserDraw)
         {
-            laserDraw = false;
-            drawLaser(2 ,0 , "right" , 0, g);
+            if(beginner)
+            {
+                drawLaser(1, 0, "start" , 0, g);
+            }
+            else
+            {
+                drawLaser(0, 2, "start" , 0, g);
+            }
         }
-        //bp.paintPiece(g);
-
     }
 
     /**
@@ -219,6 +237,12 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 yellow.mouseClicked(e);
                 repaint();
             }
+        }
+        laserDraw = false;
+        if(e.getX() >= 725 && e.getX() <= 825 && e.getY() >= 710 && e.getY() <= 810)
+        {
+            laserDraw = true;
+            repaint();
         }
     }
 
@@ -279,6 +303,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 repaint();
             }
         }
+        laserDraw = false;
     }
 
     /**
@@ -385,48 +410,6 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                     purple4.mouseDragged(e);
                     repaint();
                 }
-            }
-        }
-    }
-
-    public void drawLaser(int row, int col, String previous, int piecesHit, Graphics g)
-    {
-        if(row < 0 || row > 4 || col < 0 || col > 4)
-        {
-            return;
-        }
-        else if(board[row][col] == null)
-        {
-            if(previous.equals("right"))
-            {
-                g.fillRect(100 + row * 120, 160 + col * 120, 120, 10);
-                drawLaser(row, col + 1, "right", piecesHit, g);
-            }
-            else if(previous.equals("left"))
-            {
-                g.fillRect(100 + row * 100, 160 + col * 100, 120, 10);
-                drawLaser(row, col - 1, "left", piecesHit, g);
-            }
-            else if(previous.equals("top"))
-            {
-                g.fillRect(100 + row * 120, 160 + col * 120, 10, 120);
-                drawLaser(row + 1, col, "top", piecesHit, g);
-            }
-            else
-            {
-                g.fillRect(100 + row * 120, 160 + col * 120, 10, 120);
-                drawLaser(row - 1, col, "bottom", piecesHit, g);
-            }
-        }
-        else if(board[row][col] == laser)
-        {
-            if(laser.getCurrentIndex() == 0)
-            {
-
-            }
-            else
-            {
-
             }
         }
     }
@@ -847,6 +830,281 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             p.setXCoord(previousX);
             p.setYCoord(previousY);
             board[p.getRow()][p.getCol()] = p;
+        }
+    }
+
+    /**
+     * This is a recursive method that will draw the laser when the fire button is pressed. This will stop
+     * either when it reaches the edge, the target, or a solid side of a piece.
+     * @param row - the current row the laser is in
+     * @param col - the current col the laser is in
+     * @param previous - The direction the previous lase shot is coming from. Is start when first used
+     * @param piecesHit - how many pieces the laser has interacted with so far
+     * @param g - The image to be created.
+     */
+    public void drawLaser(int row, int col, String previous, int piecesHit, Graphics g)
+    {
+        if(row < 0 || row > 4 || col < 0 || col > 4)
+        {
+            return;
+        }
+        else if(board[row][col] == null)
+        {
+            if(previous.equals("right"))
+            {
+                g.fillRect(100 + col * 120, 160 + row * 120, 120, 10);
+                drawLaser(row, col - 1, "right", piecesHit, g);
+            }
+            else if(previous.equals("left"))
+            {
+                g.fillRect(100 + col * 120, 160 + row * 120, 120, 10);
+                drawLaser(row, col + 1, "left", piecesHit, g);
+            }
+            else if(previous.equals("top"))
+            {
+                g.fillRect(160 + col * 120, 100 + row * 120, 10, 120);
+                drawLaser(row + 1, col, "top", piecesHit, g);
+            }
+            else
+            {
+                g.fillRect(160 + col * 120, 100 + row * 120, 10, 120);
+                drawLaser(row - 1, col, "bottom", piecesHit, g);
+            }
+        }
+        else if(board[row][col] == laser)
+        {
+            if(laser.getCurrentIndex() == 0)
+            {
+                if(previous.equals("start"))
+                {
+                    drawLaser(row + 1, col, "top", piecesHit, g);
+                }
+            }
+            else
+            {
+                if(previous.equals("start"))
+                {
+                    drawLaser(row, col + 1, "left", piecesHit, g);
+                }
+            }
+        }
+        else if(board[row][col] == blue)
+        {
+            if(blue.getCurrentIndex() == 0)
+            {
+                if(previous.equals("top"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+                else if(previous.equals("right"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
+                }
+                else if(previous.equals("left"))
+                {
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    drawLaser(row + 1, col, "top", piecesHit + 1, g);
+                }
+                else
+                {
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    drawLaser(row, col - 1, "right", piecesHit + 1, g);
+                }
+            }
+            else if(blue.getCurrentIndex() == 1)
+            {
+                if(previous.equals("top"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    drawLaser(row, col - 1, "right", piecesHit + 1, g);
+                }
+                else if(previous.equals("left"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
+                }
+                else if(previous.equals("right"))
+                {
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    drawLaser(row + 1, col, "top", piecesHit + 1, g);
+                }
+                else
+                {
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+            }
+            else return;
+        }
+        else if(board[row][col] == target)
+        {
+            if(target.getCurrentIndex() == 0)
+            {
+                if(previous.equals("top"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+                else if(previous.equals("right"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
+                }
+                else if(previous.equals("bottom"))
+                {
+                    if(piecesHit == totalPieces)
+                    {
+                        g.setColor(Color.BLACK);
+                        g.drawString("You Win!", 110, 730);
+                    }
+                    else
+                    {
+                        g.setColor(Color.BLACK);
+                        g.drawString("You did not hit all of the pieces, try again!", 110, 730);
+                    }
+                }
+            }
+            else if(target.getCurrentIndex() == 1)
+            {
+                if(previous.equals("right"))
+                {
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    drawLaser(row + 1, col, "top", piecesHit + 1, g);
+                }
+                else if(previous.equals("bottom"))
+                {
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+                else if(previous.equals("left"))
+                {
+                    if(piecesHit == totalPieces)
+                    {
+                        g.setColor(Color.BLACK);
+                        g.drawString("You Win!", 110, 730);
+                    }
+                    else
+                    {
+                        g.setColor(Color.BLACK);
+                        g.drawString("You did not hit all of the pieces, try again!", 110, 730);
+                    }
+                }
+            }
+        }
+        else if(board[row][col] == yellow)
+        {
+            if(yellow.getCurrentIndex() == 0)
+            {
+                if(previous.equals("top"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 50);
+                    g.fillRect(160 + col * 120, 170 + row * 120, 10, 50);
+                    drawLaser(row + 1, col, "top", piecesHit + 1, g);
+                }
+                else if(previous.equals("bottom"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 50);
+                    g.fillRect(160 + col * 120, 170 + row * 120, 10, 50);
+                    drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
+                }
+                else return;
+            }
+            else if(yellow.getCurrentIndex() == 1)
+            {
+                if(previous.equals("right"))
+                {
+                    g.fillRect(100 + col * 120, 160 + row * 120, 50, 10);
+                    g.fillRect(170 + col * 120, 160 + row * 120, 50, 10);
+                    drawLaser(row, col - 1, "right", piecesHit + 1, g);
+                }
+                else if(previous.equals("left"))
+                {
+                    g.fillRect(100 + col * 120, 160 + row * 120, 55, 10);
+                    g.fillRect(170 + col * 120, 160 + row * 120, 55, 10);
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+                else return;
+            }
+            else return;//question mark
+        }
+        else//all purple pieces
+        {
+            PurplePiece p = (PurplePiece)board[row][col];//downcasting piece to purplepiece
+            if(p.getCurrentIndex() == 0)
+            {
+                if(previous.equals("top"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+                else if(previous.equals("right"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
+                }
+            }
+            else if(p.getCurrentIndex() == 1)
+            {
+                if(previous.equals("right"))
+                {
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    drawLaser(row + 1, col, "top", piecesHit + 1, g);
+                }
+                else if(previous.equals("bottom"))
+                {
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    drawLaser(row, col + 1, "left", piecesHit + 1, g);
+                }
+            }
+            else if(p.getCurrentIndex() == 2)
+            {
+                if(previous.equals("left"))
+                {
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    drawLaser(row + 1, col, "top", piecesHit + 1, g);
+                }
+                else if(previous.equals("bottom"))
+                {
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    drawLaser(row, col - 1, "right", piecesHit + 1, g);
+                }
+            }
+            else if(p.getCurrentIndex() == 3)
+            {
+                if(previous.equals("top"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    drawLaser(row, col - 1, "right", piecesHit + 1, g);
+                }
+                else if(previous.equals("left"))
+                {
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
+                }
+            }
+            else return;//question mark
         }
     }
 }

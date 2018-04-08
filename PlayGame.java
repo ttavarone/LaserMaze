@@ -8,7 +8,7 @@ import javax.swing.*;
  * @version 1.0
  */
 public class PlayGame {
-
+    
     /**
      * This method sets up the JFrame for the game, and then prompts the user for the level of 
      * difficulty they want to do. The choice by the user determines which board is made.
