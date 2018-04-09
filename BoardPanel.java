@@ -10,7 +10,7 @@ import java.awt.event.MouseMotionListener;
  * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
-
+//Purple Piece 2 busted, change piece dragged function
 class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
 {
     protected Piece[][] board;
@@ -31,11 +31,12 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     protected PurplePiece purple4 = new PurplePiece(2, 1000, 1000);//725, 590
     private boolean beginner = true;
     private boolean laserDraw = false;;
-    //These prevent the purples from overlapping when dragged
+    //These show which piece is currently being dragged.
     private boolean draggingPurple1 = false;
     private boolean draggingPurple2 = false;
     private boolean draggingPurple3 = false;
     private boolean draggingPurple4 = false;
+    private boolean draggingBlue = false;
 
     public int totalPieces = 5;
     public int previousX, previousY;
@@ -239,11 +240,6 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             }
         }
         laserDraw = false;
-        if(e.getX() >= 725 && e.getX() <= 825 && e.getY() >= 710 && e.getY() <= 810)
-        {
-            laserDraw = true;
-            repaint();
-        }
     }
 
     /**
@@ -253,57 +249,62 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
      */
     @Override
     public void mousePressed( MouseEvent e ) {
-        if(beginner) //blue is the only piece that can be moved in beginner
+        if(e.getX() >= 725 && e.getX() <= 825 && e.getY() >= 710 && e.getY() <= 810)
         {
-            if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
-            {
-                blue.mousePressed(e);
-                previousX = blue.getXCoord();
-                previousY = blue.getYCoord();
-                board[blue.getRow()][blue.getCol()] = null;
-                repaint();
-            }
+            laserDraw = true;
         }
-        else // purple is the only piece that can be moved in advanced
+        else
         {
-            if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
+            if(beginner) //blue is the only piece that can be moved in beginner
             {
-                purple1.mousePressed(e);
-                previousX = purple1.getXCoord();
-                previousY = purple1.getYCoord();
-                board[purple1.getRow()][purple1.getCol()] = null;
-                draggingPurple1 = true;
-                repaint();
+                if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
+                {
+                    blue.mousePressed(e);
+                    previousX = blue.getXCoord();
+                    previousY = blue.getYCoord();
+                    board[blue.getRow()][blue.getCol()] = null;
+                    draggingBlue = true;
+                }
             }
-            else if(e.getX() >= purple2.getXCoord() && e.getX() <= purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord() && e.getY() <= purple2.getYCoord() + 100)
+            else // purple is the only piece that can be moved in advanced
             {
-                purple2.mousePressed(e);
-                previousX = purple2.getXCoord();
-                previousY = purple2.getYCoord();
-                board[purple2.getRow()][purple1.getCol()] = null;
-                draggingPurple2 = true;
-                repaint();
+                if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
+                {
+                    purple1.mousePressed(e);
+                    previousX = purple1.getXCoord();
+                    previousY = purple1.getYCoord();
+                    board[purple1.getRow()][purple1.getCol()] = null;
+                    draggingPurple1 = true;
+                }
+                else if(e.getX() >= purple2.getXCoord() && e.getX() <= purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord() && e.getY() <= purple2.getYCoord() + 100)
+                {
+                    purple2.mousePressed(e);
+                    previousX = purple2.getXCoord();
+                    previousY = purple2.getYCoord();
+                    board[purple2.getRow()][purple2.getCol()] = null;
+                    draggingPurple2 = true;
+                    repaint();
+                }
+                else if(e.getX() >= purple3.getXCoord() && e.getX() <= purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord() && e.getY() <= purple3.getYCoord() + 100)
+                {
+                    purple3.mousePressed(e);
+                    previousX = purple3.getXCoord();
+                    previousY = purple3.getYCoord();
+                    board[purple3.getRow()][purple3.getCol()] = null;
+                    draggingPurple3 = true;
+                }
+                else if(e.getX() >= purple4.getXCoord() && e.getX() <= purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord() && e.getY() <= purple4.getYCoord() + 100)
+                {
+                    purple4.mousePressed(e);
+                    previousX = purple4.getXCoord();
+                    previousY = purple4.getYCoord();
+                    board[purple4.getRow()][purple4.getCol()] = null;
+                    draggingPurple4 = true;
+                }
             }
-            else if(e.getX() >= purple3.getXCoord() && e.getX() <= purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord() && e.getY() <= purple3.getYCoord() + 100)
-            {
-                purple3.mousePressed(e);
-                previousX = purple3.getXCoord();
-                previousY = purple3.getYCoord();
-                board[purple3.getRow()][purple3.getCol()] = null;
-                draggingPurple3 = true;
-                repaint();
-            }
-            else if(e.getX() >= purple4.getXCoord() && e.getX() <= purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord() && e.getY() <= purple4.getYCoord() + 100)
-            {
-                purple4.mousePressed(e);
-                previousX = purple4.getXCoord();
-                previousY = purple4.getYCoord();
-                board[purple4.getRow()][purple4.getCol()] = null;
-                draggingPurple4 = true;
-                repaint();
-            }
+            laserDraw = false;
         }
-        laserDraw = false;
+        repaint();
     }
 
     /**
@@ -319,6 +320,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 blue.mouseReleased(e);
                 dropInPlace(blue, e);
+                draggingBlue = false;
                 repaint();
             }
         }
@@ -371,7 +373,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     public void mouseDragged( MouseEvent e) {
         if(beginner) //blue is the only piece that can be moved in beginner
         {
-            if(e.getX() >= blue.getXCoord() - 5 && e.getX() <= blue.getXCoord() + 105 && e.getY() >= blue.getYCoord() - 5 && e.getY() <= blue.getYCoord() + 105)
+            if(draggingBlue)
             {
                 blue.mouseDragged(e);
                 repaint();
@@ -381,35 +383,23 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         {
             if(draggingPurple1)
             {
-                if(e.getX() >= purple1.getXCoord() - 5 && e.getX() <= purple1.getXCoord() + 105 && e.getY() >= purple1.getYCoord() - 5 && e.getY() <= purple1.getYCoord() + 105)
-                {
-                    purple1.mouseDragged(e);
-                    repaint();
-                }
+                purple1.mouseDragged(e);
+                repaint();
             }
             else if(draggingPurple2)
             {
-                if(e.getX() >= purple2.getXCoord() - 5 && e.getX() <= purple2.getXCoord() + 105 && e.getY() >= purple2.getYCoord() -5 && e.getY() <= purple2.getYCoord() + 105)
-                {
-                    purple2.mouseDragged(e);
-                    repaint();
-                }
+                purple2.mouseDragged(e);
+                repaint();
             }
             else if(draggingPurple3)
             {
-                if(e.getX() >= purple3.getXCoord() - 5 && e.getX() <= purple3.getXCoord() + 105 && e.getY() >= purple3.getYCoord() - 5 && e.getY() <= purple3.getYCoord() + 105)
-                {
-                    purple3.mouseDragged(e);
-                    repaint();
-                }
+                purple3.mouseDragged(e);
+                repaint();
             }
             else if(draggingPurple4)
             {
-                if(e.getX() >= purple4.getXCoord() - 5 && e.getX() <= purple4.getXCoord() + 105 && e.getY() >= purple4.getYCoord() - 5 && e.getY() <= purple4.getYCoord() + 105)
-                {
-                    purple4.mouseDragged(e);
-                    repaint();
-                }
+                purple4.mouseDragged(e);
+                repaint();
             }
         }
     }
@@ -421,416 +411,438 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     public void dropInPlace(Piece p, MouseEvent e)
     {
         //ROW 1
+        for(int row = 0; row < 5; row++)
+        {
+            for(int col = 0; col < 5; col++)
+            {
+                if(e.getX() >= (100 + 120 * col) && e.getX() <= (220 + 120 * col) && e.getY() >= (100 + 120 * row) && e.getY() <= (220 + 120 * row))
+                {
+                    if(board[row][col] == null)
+                    {
+                        p.setXCoord(110 + (120 * col));
+                        p.setYCoord(110 + (120 * row));
+                        board[row][col] = p;
+                        p.setLocation(row, col);
+                        return;
+                    }
+                    else break;
+                }
+            }
+        }
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        /*
         if(e.getX() >= 100 && e.getX() <= 220 && e.getY() >= 100 && e.getY() <= 220)//[0][0]
         {
-            if(board[0][0] == null)
-            {
-                p.setXCoord(110);
-                p.setYCoord(110);
-                board[0][0] = p;
-                p.setLocation(0, 0);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[0][0] == null)
+        {
+        p.setXCoord(110);
+        p.setYCoord(110);
+        board[0][0] = p;
+        p.setLocation(0, 0);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 220 && e.getX() <= 340 && e.getY() >= 100 && e.getY() <= 220)//[0][1]
         {
-            if(board[0][1] == null)
-            {
-                p.setXCoord(230);
-                p.setYCoord(110);
-                board[0][1] = p;
-                p.setLocation(0, 1);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[0][1] == null)
+        {
+        p.setXCoord(230);
+        p.setYCoord(110);
+        board[0][1] = p;
+        p.setLocation(0, 1);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 340 && e.getX() <= 460 && e.getY() >= 100 && e.getY() <= 220)//[0][2]
         {
-            if(board[0][2] == null)
-            {
-                p.setXCoord(350);
-                p.setYCoord(110);
-                board[0][2] = p;
-                p.setLocation(0, 2);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[0][2] == null)
+        {
+        p.setXCoord(350);
+        p.setYCoord(110);
+        board[0][2] = p;
+        p.setLocation(0, 2);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 460 && e.getX() <= 580 && e.getY() >= 100 && e.getY() <= 220)//[0][3]
         {
-            if(board[0][3] == null)
-            {
-                p.setXCoord(470);
-                p.setYCoord(110);
-                board[0][3] = p;
-                p.setLocation(0, 3);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[0][3] == null)
+        {
+        p.setXCoord(470);
+        p.setYCoord(110);
+        board[0][3] = p;
+        p.setLocation(0, 3);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 580 && e.getX() <= 700 && e.getY() >= 100 && e.getY() <= 220)//[0][4]
         {
-            if(board[0][4] == null)
-            {
-                p.setXCoord(590);
-                p.setYCoord(110);
-                board[0][4] = p;
-                p.setLocation(0, 4);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[0][4] == null)
+        {
+        p.setXCoord(590);
+        p.setYCoord(110);
+        board[0][4] = p;
+        p.setLocation(0, 4);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         //ROW 2
         else if(e.getX() >= 100 && e.getX() <= 220 && e.getY() >= 220 && e.getY() <= 340)//[1][0]
         {
-            if(board[1][0] == null)
-            {
-                p.setXCoord(110);
-                p.setYCoord(230);
-                board[1][0] = p;
-                p.setLocation(1, 0);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[1][0] == null)
+        {
+        p.setXCoord(110);
+        p.setYCoord(230);
+        board[1][0] = p;
+        p.setLocation(1, 0);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 220 && e.getX() <= 340 && e.getY() >= 220 && e.getY() <= 340)//[1][1]
         {
-            if(board[1][1] == null)
-            {
-                p.setXCoord(230);
-                p.setYCoord(230);
-                board[1][1] = p;
-                p.setLocation(1, 1);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[1][1] == null)
+        {
+        p.setXCoord(230);
+        p.setYCoord(230);
+        board[1][1] = p;
+        p.setLocation(1, 1);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 340 && e.getX() <= 460 && e.getY() >= 220 && e.getY() <= 340)//[1][2]
         {
-            if(board[1][2] == null)
-            {
-                p.setXCoord(350);
-                p.setYCoord(230);
-                board[1][2] = p;
-                p.setLocation(1, 2);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[1][2] == null)
+        {
+        p.setXCoord(350);
+        p.setYCoord(230);
+        board[1][2] = p;
+        p.setLocation(1, 2);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 460 && e.getX() <= 580 && e.getY() >= 220 && e.getY() <= 340)//[1][3]
         {
-            if(board[1][3] == null)
-            {
-                p.setXCoord(470);
-                p.setYCoord(230);
-                board[1][3] = p;
-                p.setLocation(1, 3);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[1][3] == null)
+        {
+        p.setXCoord(470);
+        p.setYCoord(230);
+        board[1][3] = p;
+        p.setLocation(1, 3);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 580 && e.getX() <= 700 && e.getY() >= 220 && e.getY() <= 340)//[1][4]
         {
-            if(board[1][4] == null)
-            {
-                p.setXCoord(590);
-                p.setYCoord(230);
-                board[1][4] = p;
-                p.setLocation(1, 4);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[1][4] == null)
+        {
+        p.setXCoord(590);
+        p.setYCoord(230);
+        board[1][4] = p;
+        p.setLocation(1, 4);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         //ROW 3
         else if(e.getX() >= 100 && e.getX() <= 220 && e.getY() >= 340 && e.getY() <= 460)//[2][0]
         {
-            if(board[2][0] == null)
-            {
-                p.setXCoord(110);
-                p.setYCoord(350);
-                board[2][0] = p;
-                p.setLocation(2, 0);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[2][0] == null)
+        {
+        p.setXCoord(110);
+        p.setYCoord(350);
+        board[2][0] = p;
+        p.setLocation(2, 0);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 220 && e.getX() <= 340 && e.getY() >= 340 && e.getY() <= 460)//[2][1]
         {
-            if(board[2][1] == null)
-            {
-                p.setXCoord(230);
-                p.setYCoord(350);
-                board[2][1] = p;
-                p.setLocation(2, 1);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[2][1] == null)
+        {
+        p.setXCoord(230);
+        p.setYCoord(350);
+        board[2][1] = p;
+        p.setLocation(2, 1);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 340 && e.getX() <= 460 && e.getY() >= 340 && e.getY() <= 460)//[2][2]
         {
-            if(board[2][2] == null)
-            {
-                p.setXCoord(350);
-                p.setYCoord(350);
-                board[2][2] = p;
-                p.setLocation(2, 2);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[2][2] == null)
+        {
+        p.setXCoord(350);
+        p.setYCoord(350);
+        board[2][2] = p;
+        p.setLocation(2, 2);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 460 && e.getX() <= 580 && e.getY() >= 340 && e.getY() <= 460)//[2][3]
         {
-            if(board[2][3] == null)
-            {
-                p.setXCoord(470);
-                p.setYCoord(350);
-                board[2][3] = p;
-                p.setLocation(2, 3);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[2][3] == null)
+        {
+        p.setXCoord(470);
+        p.setYCoord(350);
+        board[2][3] = p;
+        p.setLocation(2, 3);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 580 && e.getX() <= 700 && e.getY() >= 340 && e.getY() <= 460)//[2][4]
         {
-            if(board[2][4] == null)
-            {
-                p.setXCoord(590);
-                p.setYCoord(350);
-                board[2][4] = p;
-                p.setLocation(2, 4);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[2][4] == null)
+        {
+        p.setXCoord(590);
+        p.setYCoord(350);
+        board[2][4] = p;
+        p.setLocation(2, 4);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         //ROW 4
         else if(e.getX() >= 100 && e.getX() <= 220 && e.getY() >= 460 && e.getY() <= 580)//[3][0]
         {
-            if(board[3][0] == null)
-            {
-                p.setXCoord(110);
-                p.setYCoord(470);
-                board[3][0] = p;
-                p.setLocation(3, 0);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[3][0] == null)
+        {
+        p.setXCoord(110);
+        p.setYCoord(470);
+        board[3][0] = p;
+        p.setLocation(3, 0);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 220 && e.getX() <= 340 && e.getY() >= 460 && e.getY() <= 580)//[3][1]
         {
-            if(board[3][1] == null)
-            {
-                p.setXCoord(230);
-                p.setYCoord(470);
-                board[3][1] = p;
-                p.setLocation(3, 1);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[3][1] == null)
+        {
+        p.setXCoord(230);
+        p.setYCoord(470);
+        board[3][1] = p;
+        p.setLocation(3, 1);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 340 && e.getX() <= 460 && e.getY() >= 460 && e.getY() <= 580)//[3][2]
         {
-            if(board[3][2] == null)
-            {
-                p.setXCoord(350);
-                p.setYCoord(470);
-                board[3][2] = p;
-                p.setLocation(3, 2);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[3][2] == null)
+        {
+        p.setXCoord(350);
+        p.setYCoord(470);
+        board[3][2] = p;
+        p.setLocation(3, 2);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 460 && e.getX() <= 580 && e.getY() >= 460 && e.getY() <= 580)//[3][3]
         {
-            if(board[3][3] == null)
-            {
-                p.setXCoord(470);
-                p.setYCoord(470);
-                board[3][3] = p;
-                p.setLocation(3, 3);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[3][3] == null)
+        {
+        p.setXCoord(470);
+        p.setYCoord(470);
+        board[3][3] = p;
+        p.setLocation(3, 3);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         else if(e.getX() >= 580 && e.getX() <= 700 && e.getY() >= 460 && e.getY() <= 580)//[3][4]
         {
-            if(board[3][4] == null)
-            {
-                p.setXCoord(590);
-                p.setYCoord(470);
-                board[3][4] = p;
-                p.setLocation(3, 4);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        if(board[3][4] == null)
+        {
+        p.setXCoord(590);
+        p.setYCoord(470);
+        board[3][4] = p;
+        p.setLocation(3, 4);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
         }
         //ROW 5
         else if(e.getX() >= 100 && e.getX() <= 220 && e.getY() >= 580 && e.getY() <= 700)//[4][0]
         {
-            if(board[4][0] == null)
-            {
-                p.setXCoord(110);
-                p.setYCoord(590);
-                board[4][0] = p;
-                p.setLocation(4, 0);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
-        }
-        else if(e.getX() >= 220 && e.getX() <= 340 && e.getY() >= 590 && e.getY() <= 700)//[4][1]
+        if(board[4][0] == null)
         {
-            if(board[4][1] == null)
-            {
-                p.setXCoord(230);
-                p.setYCoord(590);
-                board[4][1] = p;
-                p.setLocation(4, 1);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
-        }
-        else if(e.getX() >= 340 && e.getX() <= 460 && e.getY() >= 590 && e.getY() <= 700)//[4][2]
-        {
-            if(board[4][2] == null)
-            {
-                p.setXCoord(350);
-                p.setYCoord(590);
-                board[4][2] = p;
-                p.setLocation(4, 2);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
-        }
-        else if(e.getX() >= 460 && e.getX() <= 580 && e.getY() >= 580 && e.getY() <= 700)//[4][3]
-        {
-            if(board[3][3] == null)
-            {
-                p.setXCoord(470);
-                p.setYCoord(590);
-                board[4][3] = p;
-                p.setLocation(4, 3);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
-        }
-        else if(e.getX() >= 580 && e.getX() <= 700 && e.getY() >= 580 && e.getY() <= 700)//[4][4]
-        {
-            if(board[4][4] == null)
-            {
-                p.setXCoord(590);
-                p.setYCoord(590);
-                board[4][4] = p;
-                p.setLocation(4, 4);
-            }
-            else
-            {
-                p.setXCoord(previousX);
-                p.setYCoord(previousY);
-                board[p.getRow()][p.getCol()] = p;
-            }
+        p.setXCoord(110);
+        p.setYCoord(590);
+        board[4][0] = p;
+        p.setLocation(4, 0);
         }
         else
         {
-            p.setXCoord(previousX);
-            p.setYCoord(previousY);
-            board[p.getRow()][p.getCol()] = p;
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
         }
+        }
+        else if(e.getX() >= 220 && e.getX() <= 340 && e.getY() >= 590 && e.getY() <= 700)//[4][1]
+        {
+        if(board[4][1] == null)
+        {
+        p.setXCoord(230);
+        p.setYCoord(590);
+        board[4][1] = p;
+        p.setLocation(4, 1);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
+        }
+        else if(e.getX() >= 340 && e.getX() <= 460 && e.getY() >= 590 && e.getY() <= 700)//[4][2]
+        {
+        if(board[4][2] == null)
+        {
+        p.setXCoord(350);
+        p.setYCoord(590);
+        board[4][2] = p;
+        p.setLocation(4, 2);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
+        }
+        else if(e.getX() >= 460 && e.getX() <= 580 && e.getY() >= 580 && e.getY() <= 700)//[4][3]
+        {
+        if(board[3][3] == null)
+        {
+        p.setXCoord(470);
+        p.setYCoord(590);
+        board[4][3] = p;
+        p.setLocation(4, 3);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
+        }
+        else if(e.getX() >= 580 && e.getX() <= 700 && e.getY() >= 580 && e.getY() <= 700)//[4][4]
+        {
+        if(board[4][4] == null)
+        {
+        p.setXCoord(590);
+        p.setYCoord(590);
+        board[4][4] = p;
+        p.setLocation(4, 4);
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }
+        }
+        else
+        {
+        p.setXCoord(previousX);
+        p.setYCoord(previousY);
+        board[p.getRow()][p.getCol()] = p;
+        }*/
     }
 
     /**
