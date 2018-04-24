@@ -10,7 +10,6 @@ import javax.swing.*;
  * @version 1.0
  */
 public class PlayGame {
-    private int x = 0;
     /**
      * This method sets up the JFrame for the game, and then prompts the 
      * user for the level of difficulty they want to do. The choice by the
