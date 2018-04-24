@@ -1,10 +1,11 @@
 import javax.swing.JPanel;
 import java.awt.Image;
 /**
- * This method contains methods for all the pieces to override, as well as the comments
- * to those methods.
+ * This method contains methods for all the pieces to override,
+ * as well as the comments to those methods.
  * 
- * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, 
+ * Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
 public abstract class Piece extends JPanel
@@ -29,7 +30,7 @@ public abstract class Piece extends JPanel
      * @return - the current position of the object on the y axis
      */
     public abstract int getYCoord();
-    
+  
     /**
      * This method sets the x coordinate of a piece to the inputted x.
      * This is essential to drop the piece in place.
@@ -50,9 +51,10 @@ public abstract class Piece extends JPanel
      * @return - the currentIndex in the imgArr of the object
      */
     public abstract int getCurrentIndex();
-    
+
     /**
-     * This method gets the current row the piece is in. It is -1 if not on board.
+     * This method gets the current row the piece is in. 
+     * It is -1 if not on board.
      * @return row - current row of piece on the game board.
      */
     public int getRow()
@@ -61,7 +63,8 @@ public abstract class Piece extends JPanel
     }
     
     /**
-     * This method gets the current column the piece is in. It is -1 if not on board.
+     * This method gets the current column the piece is in. 
+     * It is -1 if not on board.
      * @return col - current column of piece on the game board.
      */
     public int getCol()

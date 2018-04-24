@@ -1,7 +1,8 @@
 #BlueJ class context
 comment0.params=
 comment0.target=FireButton()
-comment0.text=\r\n\ This\ method\ creates\ a\ fire\ button\ on\ the\ board\ that\ will\ activate\ the\ laser\r\n
+comment0.text=\r\n\ This\ method\ creates\ a\ fire\ button\ on\ the\ board\ that\ will\r\n\ activate\ the\ laser\r\n
 comment1.params=
 comment1.target=java.awt.Image\ getImage()
+comment1.text=\r\n\ This\ method\ gets\ the\ image\ for\ the\ class,\ which\r\n\ is\ just\ the\ fire\ button.\r\n\ @return\ -\ The\ image\ used\ for\ the\ fire\ button\r\n
 numComments=2

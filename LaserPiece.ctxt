@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=startingPos\ startingX\ startingY
 comment0.target=LaserPiece(int,\ int,\ int)
-comment0.text=\r\n\ This\ method\ creates\ a\ new\ yellow\ piece\ on\ the\ board\ at\ the\ given\ starting\ position.\r\n\ The\ default\ is\ position\ 0\ when\ going\ from\ a\ question\ mark.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n
+comment0.text=\r\n\ This\ method\ creates\ a\ new\ target\ piece\ on\ the\ board\ at\ \r\n\ the\ given\ starting\ position.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n
 comment1.params=
 comment1.target=java.awt.Image\ getImage()
 comment2.params=

@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 /**
- * Write a description of class FireButton here.
+ * When this button is pressed, it will fire the laser to 
+ * complete the maze.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Logan, Tom, Eamonn, Tucker, Josh 
+ * @version 1.0
  */
 public class FireButton
 {
@@ -15,9 +16,9 @@ public class FireButton
     private int xOffset, yOffset;
     private Image fire;
     private boolean held = false;
-
     /**
-     * This method creates a fire button on the board that will activate the laser
+     * This method creates a fire button on the board that will
+     * activate the laser
      */
     public FireButton() {
         toolkit = Toolkit.getDefaultToolkit();
@@ -27,6 +28,11 @@ public class FireButton
         PIECE_HEIGHT = 100;
     }
     
+    /**
+     * This method gets the image for the class, which
+     * is just the fire button.
+     * @return - The image used for the fire button
+     */
     public Image getImage()
     {
         return fire;

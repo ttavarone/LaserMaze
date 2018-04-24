@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=startingPos\ startingX\ startingY
 comment0.target=PurplePiece(int,\ int,\ int)
-comment0.text=\r\n\ This\ method\ creates\ a\ new\ purple\ piece\ n\ the\ board\ at\ the\ given\ starting\ position.\r\n\ The\ default\ is\ position\ 0\ when\ going\ from\ a\ question\ mark.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n\ @param\ startingX\ -\ the\ starting\ x\ position\r\n\ @param\ startingY\ -\ the\ starting\ y\ position\r\n
+comment0.text=\r\n\ This\ method\ creates\ a\ new\ purple\ piece\ on\ the\ board\ at\ the\r\n\ given\ starting\ position.\ The\ default\ is\ position\ 0\r\n\ when\ going\ from\ a\ question\ mark.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n\ @param\ startingX\ -\ the\ starting\ x\ position\r\n\ @param\ startingY\ -\ the\ starting\ y\ position\r\n
 comment1.params=e
 comment1.target=void\ mouseEntered(java.awt.event.MouseEvent)
 comment1.text=\r\n\ Only\ exists\ to\ override\ an\ abstract\ method\r\n\ @param\ e\ -\ Mouse\ event\r\n
@@ -37,11 +37,11 @@ comment6.target=void\ mouseMoved(java.awt.event.MouseEvent)
 comment6.text=\r\n\ Only\ exists\ to\ override\ an\ abstract\ method\r\n\ @param\ e\ -\ Mouse\ event\r\n
 comment7.params=e
 comment7.target=void\ mouseDragged(java.awt.event.MouseEvent)
-comment7.text=\r\n\ This\ event\ will\ allow\ the\ object\ to\ be\ dragged\ from\ where\ the\ cursor\ \r\n\ was\ pressed\ down,\ but\ only\ if\ it\ was\ pressed\ down\ first.\r\n\ @param\ e\ -\ the\ event\ where\ the\ mouse\ is\ moved\ while\ a\ button\ is\ held\ down\r\n
+comment7.text=\r\n\ This\ event\ will\ allow\ the\ object\ to\ be\ dragged\ from\ where\ the\ cursor\ \r\n\ was\ pressed\ down,\ but\ only\ if\ it\ was\ pressed\ down\ first.\r\n\ @param\ e\ -\ Event\ where\ mouse\ is\ moved\ and\ held\ down\r\n
 comment8.params=
 comment8.target=int\ getRow()
-comment8.text=\r\n\ This\ method\ gets\ the\ current\ row\ the\ piece\ is\ in.\ It\ is\ -1\ if\ not\ on\ board.\r\n\ @return\ row\ -\ current\ row\ of\ piece\ on\ the\ game\ board.\r\n
+comment8.text=\r\n\ This\ method\ gets\ the\ current\ row\ the\ piece\ is\ in.\ \r\n\ It\ is\ -1\ if\ not\ on\ board.\r\n\ @return\ row\ -\ current\ row\ of\ piece\ on\ the\ game\ board.\r\n
 comment9.params=
 comment9.target=int\ getCol()
-comment9.text=\r\n\ This\ method\ gets\ the\ current\ column\ the\ piece\ is\ in.\ It\ is\ -1\ if\ not\ on\ board.\r\n\ @return\ col\ -\ current\ column\ of\ piece\ on\ the\ game\ board.\r\n
+comment9.text=\r\n\ This\ method\ gets\ the\ current\ column\ the\ piece\ is\ in.\ \r\n\ It\ is\ -1\ if\ not\ on\ board.\r\n\ @return\ col\ -\ current\ column\ of\ piece\ on\ the\ game\ board.\r\n
 numComments=17

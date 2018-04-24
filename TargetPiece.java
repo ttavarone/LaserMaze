@@ -3,10 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This class creates a target piece to be used for laser maze. The laser must end at the target on this piece, 
- * and the laser can bounce off of the side with mirrors. Since this piece does not have to rotate or move,
- * there is no Mouse Listener
- * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * This class creates a target piece to be used for laser maze. 
+ * The laser must end at the target on this piece, and the laser can 
+ * bounce off of the side with mirrors.
+ * 
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius,
+ * Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
 public class TargetPiece extends Piece{
@@ -21,10 +23,9 @@ public class TargetPiece extends Piece{
     private Image left;
     private int currentIndex;
     int xCoordinate, yCoordinate;
-
     /**
-     * This method creates a new yellow piece on the board at the given starting position.
-     * The default is position 0 when going from a question mark.
+     * This method creates a new target piece on the board at the 
+     * given starting position. 
      * @param startingPos - the starting position of the piece.
      */
     public TargetPiece(int startingPos, int startingX, int startingY) {

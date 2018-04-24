@@ -1,15 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 /**
- * This class creates a blue piece to be used for laser maze. The laser can bounce off this piece
- * from all four directions, and can be both rotated and dragged.
+ * This class creates a blue piece to be used for laser maze. 
+ * The laser can bounce off this piece from all four directions, 
+ * and can be both rotated and dragged.
  * 
- * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, 
+ * Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
-public class BluePiece extends Piece implements MouseListener, MouseMotionListener{
+public class BluePiece extends Piece implements MouseListener,
+ MouseMotionListener{
 
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
@@ -21,20 +23,21 @@ public class BluePiece extends Piece implements MouseListener, MouseMotionListen
     private int xCoordinate, yCoordinate;
     private int xOffset, yOffset;
     private boolean held = false;
-
     /**
-     * This method creates a new blue piece n the board at the given starting position.
-     * The default is position 0 when going from a question mark.
+     * This method creates a new blue piece n the board at the given
+     * position. The default position is 0 when going from a question mark.
      * @param startingPos - the starting position of the piece.
      * @param startingX - the starting x position
      * @param startingY - the starting y position
      */
     public BluePiece(int startingPos, int startingX, int startingY) {
         toolkit = Toolkit.getDefaultToolkit();
-
-        topLeft = toolkit.getImage("project4images\\TopLeftBotRightBlue.jpg");
-        topRight = toolkit.getImage("project4images\\TopRightBotLeftBlue.jpg");
-        questionMark = toolkit.getImage("project4images\\BlueQuestionMark.jpg");
+        topLeft = toolkit.getImage(
+        "project4images\\TopLeftBotRightBlue.jpg");
+        topRight = toolkit.getImage(
+        "project4images\\TopRightBotLeftBlue.jpg");
+        questionMark = toolkit.getImage(
+        "project4images\\BlueQuestionMark.jpg");
         imgArr = new Image[3];
         imgArr[0] = topLeft;
         imgArr[1] = topRight;
@@ -126,7 +129,7 @@ public class BluePiece extends Piece implements MouseListener, MouseMotionListen
     /**
      * This event will allow the object to be dragged from where the cursor 
      * was pressed down, but only if it was pressed down first.
-     * @param e - the event where the mouse is moved while a button is held down
+     * @param e - Event when mouse is held down and moved
      */
     @Override
     public void mouseDragged( MouseEvent e) {

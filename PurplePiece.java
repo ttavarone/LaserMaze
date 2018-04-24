@@ -1,14 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+////////////////////////////////////////////////////////////////////////////////
 /**
- * This class creates a purple piece to be used for laser maze. The laser can bounce off this piece
- * from only two directions, and can be both rotated and dragged
- * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * This class creates a purple piece to be used for laser maze.
+ * The laser can bounce off this piece from only two directions, 
+ * and can be both rotated and dragged
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, 
+ * Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
-public class PurplePiece extends Piece implements MouseListener, MouseMotionListener {
+public class PurplePiece extends Piece implements MouseListener,
+ MouseMotionListener {
 
     final private int PIECE_WIDTH;
     final private int PIECE_HEIGHT;
@@ -22,22 +25,22 @@ public class PurplePiece extends Piece implements MouseListener, MouseMotionList
     int xCoordinate, yCoordinate;
     int xOffset, yOffset;
     boolean held = false;
-
     /**
-     * This method creates a new purple piece n the board at the given starting position.
-     * The default is position 0 when going from a question mark.
+     * This method creates a new purple piece on the board at the
+     * given starting position. The default is position 0
+     * when going from a question mark.
      * @param startingPos - the starting position of the piece.
      * @param startingX - the starting x position
      * @param startingY - the starting y position
      */
     public PurplePiece(int startingPos, int startingX, int startingY) {
         toolkit = Toolkit.getDefaultToolkit();
-
         botLeft = toolkit.getImage("project4images\\BotLeftPurple.jpg");
         topLeft = toolkit.getImage("project4images\\TopLeftPurple.jpg");
         topRight = toolkit.getImage("project4images\\TopRightPurple.jpg");
         botRight = toolkit.getImage("project4images\\BotRightPurple.jpg");
-        questionMark = toolkit.getImage("project4images\\PurpleQuestionMark.jpg");
+        questionMark = toolkit.getImage(
+        "project4images\\PurpleQuestionMark.jpg");
         imgArr = new Image[5];
         imgArr[0] = botLeft;
         imgArr[1] = topLeft;
@@ -130,7 +133,7 @@ public class PurplePiece extends Piece implements MouseListener, MouseMotionList
     /**
      * This event will allow the object to be dragged from where the cursor 
      * was pressed down, but only if it was pressed down first.
-     * @param e - the event where the mouse is moved while a button is held down
+     * @param e - Event where mouse is moved and held down
      */
     @Override
     public void mouseDragged( MouseEvent e) {
@@ -142,16 +145,18 @@ public class PurplePiece extends Piece implements MouseListener, MouseMotionList
     }
     
     /**
-     * This method gets the current row the piece is in. It is -1 if not on board.
+     * This method gets the current row the piece is in. 
+     * It is -1 if not on board.
      * @return row - current row of piece on the game board.
      */
     public int getRow()
     {
         return row;
     }
-    
+  
     /**
-     * This method gets the current column the piece is in. It is -1 if not on board.
+     * This method gets the current column the piece is in. 
+     * It is -1 if not on board.
      * @return col - current column of piece on the game board.
      */
     public int getCol()

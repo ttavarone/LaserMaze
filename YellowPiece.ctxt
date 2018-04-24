@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=startingPos\ startingX\ startingY
 comment0.target=YellowPiece(int,\ int,\ int)
-comment0.text=\r\n\ This\ method\ creates\ a\ new\ yellow\ piece\ on\ the\ board\ at\ the\ given\ starting\ position.\r\n\ The\ default\ is\ position\ 0\ when\ going\ from\ a\ question\ mark.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n
+comment0.text=\r\n\ This\ method\ creates\ a\ new\ yellow\ piece\ on\ the\ board\ at\ \r\n\ the\ given\ starting\ position.\ The\ default\ is\ position\ 0\ \r\n\ when\ going\ from\ a\ question\ mark.\r\n\ @param\ startingPos\ -\ the\ starting\ position\ of\ the\ piece.\r\n
 comment1.params=e
 comment1.target=void\ mouseEntered(java.awt.event.MouseEvent)
 comment1.text=\r\n\ Only\ exists\ to\ override\ an\ abstract\ method\r\n\ @param\ e\ -\ Mouse\ event\r\n

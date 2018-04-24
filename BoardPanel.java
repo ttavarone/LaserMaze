@@ -4,13 +4,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 /**
- * This method creates the panel based on the input it is given, then allows the player to move
- * the pieces in order to fire the laser.
+ * This method creates the panel based on the input it is given, then 
+ * allows the player to move the pieces in order to fire the laser.
  * 
- * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, 
+ * Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
-//Purple Piece 2 busted, change piece dragged function
 class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
 {
     protected Piece[][] board;
@@ -27,8 +27,8 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     protected PurplePiece purple2 = new PurplePiece(3, 590, 590);
     protected PurplePiece purple3 = new PurplePiece(2, 590, 230);
     //These pieces are only present on advanced
-    protected YellowPiece yellow = new YellowPiece(2, 1000, 1000);//470, 350);
-    protected PurplePiece purple4 = new PurplePiece(2, 1000, 1000);//725, 590
+    protected YellowPiece yellow = new YellowPiece(2, 1000, 1000);
+    protected PurplePiece purple4 = new PurplePiece(2, 1000, 1000);
     private boolean beginner = true;
     private boolean laserDraw = false;;
     //These show which piece is currently being dragged.
@@ -40,10 +40,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
 
     public int totalPieces = 5;
     public int previousX, previousY;
-
     /**
-     * This constructor creates the board based on the inputted difficulty. It also does the 
-     * important task of activiating the listeners.
+     * This constructor creates the board based on the inputted difficulty. 
+     * It also does the important task of activiating the listeners.
      * @param mode - whether the board will be in beginner or advanced
      */
     public BoardPanel(int mode)
@@ -94,10 +93,11 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         addMouseListener( this );
         addMouseMotionListener( this );
     }
-
+    
     /**
-     * This method creates the board for the game and all the pieces based on 
-     * their x and y coordinates, as well as the current orientatio of the piece.
+     * This method creates the board for the game and all the
+     * pieces based on their x and y coordinates, as well as 
+     * the current orientation of the piece.
      * @ param g - The image to be created.
      */
     @Override
@@ -115,7 +115,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         g.fillRoundRect(90, 90, boardWidth+20, boardHeight+20, 50, 50);
         g.setColor(Color.LIGHT_GRAY);
         g.fillRoundRect(100, 100, boardWidth, boardHeight, 50, 50);
-
+        
         //create inner squares
         g.setColor(Color.BLACK);
         g.drawRect(100, 100, sqDim, sqDim);
@@ -156,16 +156,23 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         g.fillRect(715, 700, 115, 5);
 
         g.drawImage(fButton.getImage(), 725, 710, this);
-
-        //Drawing the piece
-        g.drawImage(laser.getImage(), laser.getXCoord(), laser.getYCoord(), this);
-        g.drawImage(blue.getImage(), blue.getXCoord(), blue.getYCoord(), this);
-        g.drawImage(target.getImage(), target.getXCoord(), target.getYCoord(), this);
-        g.drawImage(yellow.getImage(), yellow.getXCoord(), yellow.getYCoord(), this);
-        g.drawImage(purple1.getImage(), purple1.getXCoord(), purple1.getYCoord(), this);
-        g.drawImage(purple2.getImage(), purple2.getXCoord(), purple2.getYCoord(), this);
-        g.drawImage(purple3.getImage(), purple3.getXCoord(), purple3.getYCoord(), this);
-        g.drawImage(purple4.getImage(), purple4.getXCoord(), purple4.getYCoord(), this);
+        //Drawing the pieces. On two lines to avoid line wrap
+        g.drawImage(laser.getImage(), laser.getXCoord(), 
+        laser.getYCoord(), this);
+        g.drawImage(blue.getImage(), blue.getXCoord(), 
+        blue.getYCoord(), this);
+        g.drawImage(target.getImage(), target.getXCoord(), 
+        target.getYCoord(), this);
+        g.drawImage(yellow.getImage(), yellow.getXCoord(), 
+        yellow.getYCoord(), this);
+        g.drawImage(purple1.getImage(), purple1.getXCoord(), 
+        purple1.getYCoord(), this);
+        g.drawImage(purple2.getImage(), purple2.getXCoord(), 
+        purple2.getYCoord(), this);
+        g.drawImage(purple3.getImage(), purple3.getXCoord(), 
+        purple3.getYCoord(), this);
+        g.drawImage(purple4.getImage(), purple4.getXCoord(), 
+        purple4.getYCoord(), this);
 
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", 20, 20));
@@ -197,15 +204,18 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     public void mouseExited( MouseEvent e ) { }
 
     /**
-     * This method will determine if a piece is right clicked on, and if it is in the correct difficulty,
-     * it will go into that pieces mouseClicked method and rotate it
+     * This method will determine if a piece is right clicked on, and
+     * if it is in the correct difficulty, it will go into that pieces 
+     * mouseClicked method and rotate it
      * @param e - The event where the mouse is clicked down
      */
     @Override
     public void mouseClicked( MouseEvent e ) {
         if(beginner)// blue is the only piece to rotate in beginner
         {
-            if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
+            if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord()
+            + 100 && e.getY() >= blue.getYCoord() && e.getY()
+            <= blue.getYCoord() + 100)
             {
                 blue.mouseClicked(e);
                 repaint();
@@ -213,27 +223,37 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
         else // both purple and yellow can rotate in advanced
         {
-            if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
+            if(e.getX() >= purple1.getXCoord() && e.getX() <=
+            purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord()
+            && e.getY() <= purple1.getYCoord() + 100)
             {
                 purple1.mouseClicked(e);
                 repaint();
             }
-            else if(e.getX() >= purple2.getXCoord() && e.getX() <= purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord() && e.getY() <= purple2.getYCoord() + 100)
+            else if(e.getX() >= purple2.getXCoord() && e.getX() <= 
+            purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord()
+            && e.getY() <= purple2.getYCoord() + 100)
             {
                 purple2.mouseClicked(e);
                 repaint();
-            }
-            else if(e.getX() >= purple3.getXCoord() && e.getX() <= purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord() && e.getY() <= purple3.getYCoord() + 100)
+            }            
+            else if(e.getX() >= purple3.getXCoord() && e.getX() <= 
+            purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord()
+            && e.getY() <= purple3.getYCoord() + 100)
             {
                 purple3.mouseClicked(e);
                 repaint();
             }
-            else if(e.getX() >= purple4.getXCoord() && e.getX() <= purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord() && e.getY() <= purple4.getYCoord() + 100)
+            else if(e.getX() >= purple4.getXCoord() && e.getX() <= 
+            purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord()
+            && e.getY() <= purple4.getYCoord() + 100)
             {
                 purple4.mouseClicked(e);
                 repaint();
             }
-            else if(e.getX() >= yellow.getXCoord() && e.getX() <= yellow.getXCoord() + 100 && e.getY() >= yellow.getYCoord() && e.getY() <= yellow.getYCoord() + 100)
+            else if(e.getX() >= yellow.getXCoord() && e.getX() <= 
+            yellow.getXCoord() + 100 && e.getY() >= yellow.getYCoord()
+            && e.getY() <= yellow.getYCoord() + 100)
             {
                 yellow.mouseClicked(e);
                 repaint();
@@ -243,8 +263,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     }
 
     /**
-     * This method will determine if the user pressed the mouse down on a valid piece, and then send it into that
-     * pieces mouse pressed handler to determine what happens.
+     * This method will determine if the user pressed the mouse down
+     * on a valid piece, and then send it into that pieces mouse pressed
+     * handler to determine what happens.
      * @param e - when the mouse is pushed down
      */
     @Override
@@ -257,7 +278,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         {
             if(beginner) //blue is the only piece that can be moved in beginner
             {
-                if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
+                if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord()
+                + 100 && e.getY() >= blue.getYCoord() && e.getY() <=
+                blue.getYCoord() + 100)
                 {
                     blue.mousePressed(e);
                     previousX = blue.getXCoord();
@@ -268,7 +291,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             }
             else // purple is the only piece that can be moved in advanced
             {
-                if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
+                if(e.getX() >= purple1.getXCoord() && e.getX() <=
+                purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord()
+                && e.getY() <= purple1.getYCoord() + 100)
                 {
                     purple1.mousePressed(e);
                     previousX = purple1.getXCoord();
@@ -276,7 +301,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                     board[purple1.getRow()][purple1.getCol()] = null;
                     draggingPurple1 = true;
                 }
-                else if(e.getX() >= purple2.getXCoord() && e.getX() <= purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord() && e.getY() <= purple2.getYCoord() + 100)
+                else if(e.getX() >= purple2.getXCoord() && e.getX() <=
+                purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord()
+                && e.getY() <= purple2.getYCoord() + 100)
                 {
                     purple2.mousePressed(e);
                     previousX = purple2.getXCoord();
@@ -285,7 +312,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                     draggingPurple2 = true;
                     repaint();
                 }
-                else if(e.getX() >= purple3.getXCoord() && e.getX() <= purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord() && e.getY() <= purple3.getYCoord() + 100)
+                else if(e.getX() >= purple3.getXCoord() && e.getX() <=
+                purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord()
+                && e.getY() <= purple3.getYCoord() + 100)
                 {
                     purple3.mousePressed(e);
                     previousX = purple3.getXCoord();
@@ -293,7 +322,9 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                     board[purple3.getRow()][purple3.getCol()] = null;
                     draggingPurple3 = true;
                 }
-                else if(e.getX() >= purple4.getXCoord() && e.getX() <= purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord() && e.getY() <= purple4.getYCoord() + 100)
+                else if(e.getX() >= purple4.getXCoord() && e.getX() <=
+                purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord()
+                && e.getY() <= purple4.getYCoord() + 100)
                 {
                     purple4.mousePressed(e);
                     previousX = purple4.getXCoord();
@@ -306,17 +337,19 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
         repaint();
     }
-
+    
     /**
-     * This method determines if the mouse is released over a piece, and then sends it 
-     * into the piece to determine what it does.
+     * This method determines if the mouse is released over a piece,
+     * and then sends it into the piece to determine what it does.
      * @param e - the event where the mouse button is pulled up.
      */
     @Override
     public void mouseReleased( MouseEvent e ) {
         if(beginner) //blue is the only piece that can be moved in beginner
         {
-            if(e.getX() >= blue.getXCoord() && e.getX() <= blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() && e.getY() <= blue.getYCoord() + 100)
+            if(e.getX() >= blue.getXCoord() && e.getX() <= 
+            blue.getXCoord() + 100 && e.getY() >= blue.getYCoord() 
+            && e.getY() <= blue.getYCoord() + 100)
             {
                 blue.mouseReleased(e);
                 dropInPlace(blue, e);
@@ -326,28 +359,36 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
         else // purple is the only piece that can be moved in advanced
         {
-            if(e.getX() >= purple1.getXCoord() && e.getX() <= purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord() && e.getY() <= purple1.getYCoord() + 100)
+            if(e.getX() >= purple1.getXCoord() && e.getX() <=
+            purple1.getXCoord() + 100 && e.getY() >= purple1.getYCoord()
+            && e.getY() <= purple1.getYCoord() + 100)
             {
                 purple1.mouseReleased(e);
                 dropInPlace(purple1, e);
                 draggingPurple1 = false;
                 repaint();
             }
-            else if(e.getX() >= purple2.getXCoord() && e.getX() <= purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord() && e.getY() <= purple2.getYCoord() + 100)
+            else if(e.getX() >= purple2.getXCoord() && e.getX() <=
+            purple2.getXCoord() + 100 && e.getY() >= purple2.getYCoord()
+            && e.getY() <= purple2.getYCoord() + 100)
             {
                 purple2.mouseReleased(e);
                 dropInPlace(purple2, e);
                 draggingPurple2 = false;
                 repaint();
             }
-            else if(e.getX() >= purple3.getXCoord() && e.getX() <= purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord() && e.getY() <= purple3.getYCoord() + 100)
+            else if(e.getX() >= purple3.getXCoord() && e.getX() <=
+            purple3.getXCoord() + 100 && e.getY() >= purple3.getYCoord()
+            && e.getY() <= purple3.getYCoord() + 100)
             {
                 purple3.mouseReleased(e);
                 dropInPlace(purple3, e);
                 draggingPurple3 = false;
                 repaint();
             }
-            else if(e.getX() >= purple4.getXCoord() && e.getX() <= purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord() && e.getY() <= purple4.getYCoord() + 100)
+            else if(e.getX() >= purple4.getXCoord() && e.getX() <=
+            purple4.getXCoord() + 100 && e.getY() >= purple4.getYCoord()
+            && e.getY() <= purple4.getYCoord() + 100)
             {
                 purple4.mouseReleased(e);
                 dropInPlace(purple4, e);
@@ -363,15 +404,16 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
      */
     @Override
     public void mouseMoved( MouseEvent e ){  }
-
+   
     /**
-     * This method determines if the mouse is dragged over a valid piece, and then sends it 
-     * down into that pieces method to determine what occurs. 
+     * This method determines if the mouse is dragged over a valid 
+     * piece, and then sends it down into that pieces method to 
+     * determine what occurs. 
      * @param e - The event where the mouse if moved while being held down.
      */
     @Override
     public void mouseDragged( MouseEvent e) {
-        if(beginner) //blue is the only piece that can be moved in beginner
+        if(beginner) //blue is the only piece that can move in beginner
         {
             if(draggingBlue)
             {
@@ -379,7 +421,7 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                 repaint();
             }
         }
-        else //purple is the only piece that can be moved in advanced
+        else //purple is the only piece that can move in advanced
         {
             if(draggingPurple1)
             {
@@ -405,17 +447,20 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     }
 
     /**
-     * This method determines if the piece is dropped in a valid place, and if
-     * so it will move it to the correct place in the square.
+     * This method determines if the piece is dropped in a valid place, 
+     * and if so it will move it to the correct place in the square.
+     * @param p - The piece that is being dropped in place
+     * @param e - The event where the mouse piece is being released
      */
     public void dropInPlace(Piece p, MouseEvent e)
     {
-        //ROW 1
         for(int row = 0; row < 5; row++)
         {
             for(int col = 0; col < 5; col++)
             {
-                if(e.getX() >= (100 + 120 * col) && e.getX() <= (220 + 120 * col) && e.getY() >= (100 + 120 * row) && e.getY() <= (220 + 120 * row))
+                if(e.getX() >= (100 + 120 * col) && e.getX() <= 
+                (220 + 120 * col) && e.getY() >= (100 + 120 * row)
+                && e.getY() <= (220 + 120 * row))
                 {
                     if(board[row][col] == null)
                     {
@@ -435,12 +480,13 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
     }
 
     /**
-     * This is a recursive method that will draw the laser when the fire button is pressed. This will stop
-     * either when it reaches the edge, the target, or a solid side of a piece.
+     * This is a recursive method that will draw the laser when the fire
+     * button is pressed. This will stop either when it reaches the edge,
+     * the target, or the solid side of a piece.
      * @param row - the current row the laser is in
      * @param col - the current col the laser is in
-     * @param previous - The direction the previous lase shot is coming from. Is start when first used
-     * @param piecesHit - how many pieces the laser has interacted with so far
+     * @param previous - The direction the previous laser is coming from.
+     * @param piecesHit - how many pieces the laser has interacted with
      * @param g - The image to be created.
      */
     public void drawLaser(int row, int col, String previous, int piecesHit, Graphics g)
@@ -495,26 +541,26 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("top"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//r
                     drawLaser(row, col + 1, "left", piecesHit + 1, g);
                 }
                 else if(previous.equals("right"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//r
                     drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
                 }
                 else if(previous.equals("left"))
                 {
-                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//l
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
                     drawLaser(row + 1, col, "top", piecesHit + 1, g);
                 }
                 else
                 {
-                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//l
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
                     drawLaser(row, col - 1, "right", piecesHit + 1, g);
                 }
             }
@@ -522,26 +568,26 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("top"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//l
                     drawLaser(row, col - 1, "right", piecesHit + 1, g);
                 }
                 else if(previous.equals("left"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//l
                     drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
                 }
                 else if(previous.equals("right"))
                 {
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
-                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//r
                     drawLaser(row + 1, col, "top", piecesHit + 1, g);
                 }
                 else
                 {
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
-                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//r
                     drawLaser(row, col + 1, "left", piecesHit + 1, g);
                 }
             }
@@ -553,14 +599,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("top"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//r
                     drawLaser(row, col + 1, "left", piecesHit + 1, g);
                 }
                 else if(previous.equals("right"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//r
                     drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
                 }
                 else if(previous.equals("bottom"))
@@ -581,14 +627,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("right"))
                 {
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
-                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//r
                     drawLaser(row + 1, col, "top", piecesHit + 1, g);
                 }
                 else if(previous.equals("bottom"))
                 {
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
-                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//r
                     drawLaser(row, col + 1, "left", piecesHit + 1, g);
                 }
                 else if(previous.equals("left"))
@@ -601,7 +647,8 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
                     else
                     {
                         g.setColor(Color.BLACK);
-                        g.drawString("You did not hit all of the pieces, try again!", 110, 730);
+                        g.drawString("You did not hit all of the pieces, "+
+                        "try again!", 110, 730);
                     }
                 }
             }
@@ -644,19 +691,19 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
         }
         else//all purple pieces
         {
-            PurplePiece p = (PurplePiece)board[row][col];//downcasting piece to purplepiece
+            PurplePiece p = (PurplePiece)board[row][col];
             if(p.getCurrentIndex() == 0)
             {
                 if(previous.equals("top"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//r
                     drawLaser(row, col + 1, "left", piecesHit + 1, g);
                 }
                 else if(previous.equals("right"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//from right
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(160 + col * 120, 160 + row * 120, 60, 10);//r
                     drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
                 }
             }
@@ -664,14 +711,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("right"))
                 {
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
-                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//r
                     drawLaser(row + 1, col, "top", piecesHit + 1, g);
                 }
                 else if(previous.equals("bottom"))
                 {
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
-                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//from right
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
+                    g.fillRect(160 + col * 120, 160 + row * 120, 70, 10);//r
                     drawLaser(row, col + 1, "left", piecesHit + 1, g);
                 }
             }
@@ -679,14 +726,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("left"))
                 {
-                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//l
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
                     drawLaser(row + 1, col, "top", piecesHit + 1, g);
                 }
                 else if(previous.equals("bottom"))
                 {
-                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//from left
-                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//from bottom
+                    g.fillRect(100 + col * 120, 160 + row * 120, 60, 10);//l
+                    g.fillRect(160 + col * 120, 160 + row * 120, 10, 60);//b
                     drawLaser(row, col - 1, "right", piecesHit + 1, g);
                 }
             }
@@ -694,14 +741,14 @@ class BoardPanel extends JPanel implements MouseListener, MouseMotionListener
             {
                 if(previous.equals("top"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//l
                     drawLaser(row, col - 1, "right", piecesHit + 1, g);
                 }
                 else if(previous.equals("left"))
                 {
-                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//from top
-                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//from left
+                    g.fillRect(160 + col * 120, 100 + row * 120, 10, 60);//t
+                    g.fillRect(100 + col * 120, 160 + row * 120, 70, 10);//l
                     drawLaser(row - 1, col, "bottom", piecesHit + 1, g);
                 }
             }

@@ -3,9 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This class creates a blue piece to be used for laser maze. The laser must go through the center
- * of this piece to work. This piece can be rotated, but not dragged.
- * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius, Josh DelSignore, Eamonn Conway 
+ * This class creates a blue piece to be used for laser maze. The laser
+ * must go through the center of this piece to work. 
+ * This piece can be rotated, but not dragged.
+ * @author Logan Brandt, Tucker Tavarone, Thomas Fresenius,
+ * Josh DelSignore, Eamonn Conway 
  * @version 1.0
  */
 public class YellowPiece extends Piece implements MouseListener {
@@ -21,10 +23,10 @@ public class YellowPiece extends Piece implements MouseListener {
     private Image yellowQ;
     private int currentIndex;
     int xCoordinate, yCoordinate;
-
     /**
-     * This method creates a new yellow piece on the board at the given starting position.
-     * The default is position 0 when going from a question mark.
+     * This method creates a new yellow piece on the board at 
+     * the given starting position. The default is position 0 
+     * when going from a question mark.
      * @param startingPos - the starting position of the piece.
      */
     public YellowPiece(int startingPos, int startingX, int startingY) {
