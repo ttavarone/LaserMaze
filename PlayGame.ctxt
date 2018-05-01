@@ -1,10 +1,12 @@
 #BlueJ class context
-comment0.params=
-comment0.target=void\ createAndShowGUI()
-comment0.text=\r\n\ This\ method\ sets\ up\ the\ JFrame\ for\ the\ game,\ and\ then\ prompts\ the\ \r\n\ user\ for\ the\ level\ of\ difficulty\ they\ want\ to\ do.\ The\ choice\ by\ the\r\n\ user\ determines\ which\ board\ is\ made.\r\n
-comment1.params=args
-comment1.target=void\ main(java.lang.String[])
-comment1.text=\r\n\ This\ method\ creates\ the\ GUI\ that\ will\ begin\ to\ execute\ the\ program.\r\n\ @param\ args\ -\ Command\ line\ arguments.\r\n
-comment2.params=
-comment2.target=void\ run()
-numComments=3
+comment0.target=PlayGame
+comment0.text=\r\n\ This\ class\ is\ used\ to\ set\ up\ and\ pay\ the\ game.\ The\ player\ selects\r\n\ the\ card\ level\ they\ want\ to\ do,\ and\ then\ proceeds\ to\ play\r\n\ on\ the\ board\ of\ that\ level.\r\n\ \r\n\ @author\ Logan\ Brandt,\ Tucker\ Tavarone,\ Thomas\ Fresenius,\ \r\n\ Josh\ DelSignore,\ Eamonn\ Conway\ \r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=void\ createAndShowGUI()
+comment1.text=\r\n\ This\ method\ sets\ up\ the\ JFrame\ for\ the\ game,\ and\ then\ prompts\ the\ \r\n\ user\ for\ the\ level\ of\ difficulty\ they\ want\ to\ do.\ The\ choice\ by\ the\r\n\ user\ determines\ which\ board\ is\ made.\r\n
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+comment2.text=\r\n\ This\ method\ creates\ the\ GUI\ that\ will\ begin\ to\ execute\ the\ program.\r\n\ @param\ args\ -\ Command\ line\ arguments.\r\n
+comment3.params=
+comment3.target=void\ run()
+numComments=4
